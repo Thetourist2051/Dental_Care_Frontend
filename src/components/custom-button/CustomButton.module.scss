@@ -1,0 +1,500 @@
+.themeButton {
+    border-radius: 1.5rem;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.25rem;
+    transition: 0.25s all;
+  
+    .btnLabel {
+      display: inline-block;
+      font-weight: 500;
+    }
+  
+    .btnIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .onlyIconPresent {
+    .btnIcon {
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+  
+  .button_sm {
+    padding: 0.5rem 1rem;
+  
+    .btnLabel {
+      font-size: 0.625rem;
+      line-height: 1;
+    }
+  
+    .btnImg {
+      height: 12px;
+      object-fit: contain;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        font-size: 0.75rem;
+      }
+    }
+  }
+  
+  .button_md {
+    padding: 0.55rem 1.25rem;
+  
+    .btnLabel {
+      font-size: 0.8125rem;
+    }
+  
+    .btnImg {
+      height: 16px;
+      object-fit: contain;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        font-size: 0.875rem;
+      }
+    }
+  }
+  
+  .button_xl {
+    padding: 0.75rem 1.5rem;
+  
+    .btnLabel {
+      font-size: 0.875rem;
+    }
+  
+    .btnImg {
+      height: 20px;
+      object-fit: contain;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .button_sm.button_icon_left .btnIcon{
+    margin-right: 0.375rem;
+  }
+  .button_sm.button_icon_right .btnIcon{
+    margin-left: 0.375rem;
+  }
+  .button_md.button_icon_left .btnIcon{
+    margin-right: 0.5rem;
+  }
+  .button_md.button_icon_right .btnIcon{
+    margin-left: 0.5rem;
+  }
+  .button_xl.button_icon_left .btnIcon{
+    margin-right: 0.75rem;
+  }
+  .button_xl.button_icon_right .btnIcon{
+    margin-left: 0.75rem;
+  }
+  
+  
+  // Primary Button Styles
+  .themeButton_primary_1 {
+    border-color: var(--primary-color);
+    background-color: transparent;
+  
+    .btnLabel {
+      color: var(--primary-color);
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  .themeButton_primary_0 {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+  
+    .btnLabel {
+      color: var(--themeInnColorText);
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: var(--themeInnColorText);
+      }
+    }
+  }
+  
+  // Secondary Button Styles
+  .themeButton_secondary_1 {
+    border-color: #677489dd;
+    background-color: transparent;
+  
+    .btnLabel {
+      color: #677489dd;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: #677489dd;
+      }
+    }
+  
+    &:hover {
+      border-color: #677489;
+      background-color: transparent;
+  
+      .btnLabel {
+        color: #677489;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: #677489;
+        }
+      }
+    }
+  }
+  
+  .themeButton_secondary_0 {
+    border-color: #677489dd;
+    background-color: #677489dd;
+  
+    .btnLabel {
+      color: white;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: white;
+      }
+    }
+  
+    &:hover {
+      border-color: #677489;
+      background-color: #677489;
+  
+      .btnLabel {
+        color: white;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  // Warning Button Styles
+  .themeButton_warning_1 {
+    border-color: #f97316;
+    background-color: transparent;
+  
+    .btnLabel {
+      color: #f97316;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: #f97316;
+      }
+    }
+  
+    &:hover {
+      border-color: #ea580c;
+      background-color: transparent;
+  
+      .btnLabel {
+        color: #ea580c;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: #ea580c;
+        }
+      }
+    }
+  }
+  
+  .themeButton_warning_0 {
+    border-color: #f97316;
+    background-color: #f97316;
+  
+    .btnLabel {
+      color: white;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: white;
+      }
+    }
+  
+    &:hover {
+      border-color: #ea580c;
+      background-color: #ea580c;
+  
+      .btnLabel {
+        color: white;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  .themeButton_success_1 {
+    border-color: #22c55e;
+    background-color: transparent;
+  
+    .btnLabel {
+      color: #22c55e;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: #22c55e;
+      }
+    }
+  
+    &:hover {
+      border-color: #16a34a;
+      background-color: transparent;
+  
+      .btnLabel {
+        color: #16a34a;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: #16a34a;
+        }
+      }
+    }
+  }
+  
+  .themeButton_success_0 {
+    border-color: #22c55e;
+    background-color: #22c55e;
+  
+    .btnLabel {
+      color: white;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: white;
+      }
+    }
+  
+    &:hover {
+      border-color: #16a34a;
+      background-color: #16a34a;
+  
+      .btnLabel {
+        color: white;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  .themeButton_danger_1 {
+    border-color: #ef4444;
+    background-color: transparent;
+  
+    .btnLabel {
+      color: #ef4444;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: #ef4444;
+      }
+    }
+  
+    &:hover {
+      border-color: #dc2626;
+      background-color: transparent;
+  
+      .btnLabel {
+        color: #dc2626;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: #dc2626;
+        }
+      }
+    }
+  }
+  
+  .themeButton_danger_0 {
+    border-color: #ef4444;
+    background-color: #ef4444;
+  
+    .btnLabel {
+      color: white;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: white;
+      }
+    }
+  
+    &:hover {
+      border-color: #dc2626;
+      background-color: #dc2626;
+  
+      .btnLabel {
+        color: white;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  // Info Button Styles
+  .themeButton_info_1 {
+    border-color: #0ea5e9;
+    background-color: transparent;
+  
+    .btnLabel {
+      color: #0ea5e9;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: #0ea5e9;
+      }
+    }
+  
+    &:hover {
+      border-color: #0284c7;
+      background-color: transparent;
+  
+      .btnLabel {
+        color: #0284c7;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: #0284c7;
+        }
+      }
+    }
+  }
+  
+  .themeButton_info_0 {
+    border-color: #0ea5e9;
+    background-color: #0ea5e9;
+  
+    .btnLabel {
+      color: white;
+    }
+  
+    .btnIcon {
+      .pi,
+      i {
+        color: white;
+      }
+    }
+  
+    &:hover {
+      border-color: #0284c7;
+      background-color: #0284c7;
+  
+      .btnLabel {
+        color: white;
+      }
+  
+      .btnIcon {
+        .pi,
+        i {
+          color: white;
+        }
+      }
+    }
+  }
+  
+  // Disabled State
+  .themeButton:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+  
+  // Rounded Styles
+  .themeButton_rounded_0 {
+    border-radius: 0.25em;
+  }
+  
+  .themeButton_rounded_1 {
+    border-radius: 2rem;
+  }
+  
+  // Active State (Ripple Effect)
+  .themeButton:active {
+    .pInk {
+      display: block;
+      position: absolute;
+      background: #ffffff80;
+      border-radius: 100%;
+      transform: scale(0);
+    }
+  }
+  
+  @keyframes ripple {
+    to {
+      opacity: 0;
+      transform: scale(2.5);
+    }
+  }

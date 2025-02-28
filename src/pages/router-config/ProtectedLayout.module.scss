@@ -1,0 +1,22 @@
+.render-layout{
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+}
+.sidenav-section{
+    width: 230px;
+    height: 100vh;
+}
+.outlet-section{
+    width:calc(100vw - 230px);
+    height: 100vh;
+}
+
+.scrollable-outlet-section{
+   height: calc(100vh - 3rem);
+   width: 100%;
+}

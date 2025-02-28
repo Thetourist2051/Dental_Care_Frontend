@@ -1,0 +1,78 @@
+
+.custom_form {
+    display: block;
+  }
+  
+  .custom_form .custom_form_item {
+    width: 100%;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    color: #464646;
+    min-height: 5.5rem;
+}
+
+.custom_form .custom_form_label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+    line-height: 1.25;
+  }
+  
+  .custom_form .form_input_text {
+    width: calc(100% - 1rem);
+    width: -webkit-fill-available;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #d3d3d3;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    transition: all 0.5s;
+    outline: none;
+    font-weight: 500;
+    height: 2.5rem;
+    color: var(--secondary-color);
+  }
+  
+  .custom_form .form_input_text:focus {
+    border: 1px solid #a3a3a3;
+    transition: all 0.5s;
+  }
+  
+  .custom_form .form_input_text:hover {
+    border: 1px solid #a3a3a3;
+    transition: all 0.5s;
+  }
+  
+  .custom_form .form_input_password {
+    width: calc(100% - 1rem);
+    width: -webkit-fill-available;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #d3d3d3;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    transition: all 0.5s;
+    outline: none;
+    font-weight: 500;
+    height: 2.5rem;
+    color: var(--secondary-color);
+  }
+  
+  .custom_form .form_input_password:focus {
+    border: 1px solid #a3a3a3;
+    transition: all 0.5s;
+  }
+  
+  .custom_form .form_input_password:hover {
+    border: 1px solid #a3a3a3;
+    transition: all 0.5s;
+  }
+
+  .custom_form .password_class{
+    width: 100%;
+    .p-icon-field {
+      width: 100%;
+    }
+    .p-icon-field .p-input-icon{
+        top: 30%;
+    }
+  } 

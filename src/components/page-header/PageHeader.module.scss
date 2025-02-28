@@ -1,0 +1,57 @@
+.header-nav{
+    box-sizing: border-box;
+    color: var(--primary-color);
+
+    ul{
+        list-style: none;
+        margin: 0;
+
+        li{
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.25px;
+        }
+    }
+
+}
+
+.nav-li{
+    border-bottom: 2px solid transparent;
+    transition: 0.5s;
+    color: var(--primary-color);
+    &:hover{
+        border-bottom: 2px solid var(--secondary-color);
+        color: var(--secondary-color);
+    }
+}
+.activeli{
+    border-bottom: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.header-logo {
+    padding:  0 0.5rem;
+    display: flex;
+    align-items: center;
+    img{
+        max-width: 6rem;
+        max-height: 4rem;
+        object-fit: contain;
+        padding-right: 0.5rem;
+    }
+    h6{
+        font-weight: 600;
+        margin: 0;
+        color: var(--primary-color);
+    }
+}
+
+.profile-section{
+    box-sizing: border-box;
+    span{
+        font-size: 2.75rem;
+        color: var(--primary-color);
+    }
+
+}

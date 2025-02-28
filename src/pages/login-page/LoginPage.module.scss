@@ -1,0 +1,10 @@
+.login_container{
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    background-image: url('../../assets/img/new-login-bg.jpg');
+    background-size: 100% 100%;
+}
+.login_box{
+    width: min(90%,475px);
+}
