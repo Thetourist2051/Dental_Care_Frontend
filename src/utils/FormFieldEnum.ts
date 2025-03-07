@@ -2,8 +2,7 @@ import * as Yup from "yup";
 
 export interface FormField {
   name: string;
-  type:
-    | "text"
+  type: "text"
     | "password"
     | "number"
     | "textarea"
@@ -13,7 +12,7 @@ export interface FormField {
     | "radio";
   label: string;
   placeholder?: string;
-  validation: Yup.AnySchema;
+  validation?: Yup.AnySchema;
   fieldwidth?: string;
   passwordmeter?: boolean;
 }

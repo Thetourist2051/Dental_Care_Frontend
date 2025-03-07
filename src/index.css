@@ -1,24 +1,98 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import "tailwindcss";
+/* @layer theme, base, components, utilities; */
+@layer utilities, theme;
+@import "tailwindcss/theme.css" layer(theme);
+/* @import "tailwindcss/preflight.css" layer(base); */
+@import "tailwindcss/utilities.css" layer(utilities);
+
 
 * {
   box-sizing: border-box;
+  font-family: "Raleway", serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+  /* margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0px;
+  padding-inline-end: 0px; */
 }
 
 :root {
-  --primary-color: #27445D;
-  --secondary-color: #497D74;
-  --primary-bg: #71BBB2;
-  --secondary-bg: #EFE9D5;
-  --tirtiary-bg: #E2E0C8;
+  --pri-color: #eb6b0e;
+  --sec-color: #66785F;
+  --tir-color: #91AC8F;
+
+  --base-color: #fafafa;
+  --text-black: #232323;
+
+  --pri-text-color: #3e3358;
+
+  --pri-bg: #ff7745;
+  --sec-bg: #787b7d;
+  --tir-bg: #f4f1ec;
 }
+
+/* :root{
+font-family: "Raleway", serif;
+--font-family: "Raleway", serif;
+--surface-a: #ffffff;
+--surface-b: #f9fafb;
+--surface-c: #f3f4f6;
+--surface-d: #e5e7eb;
+--surface-e: #ffffff;
+--surface-f: #ffffff;
+--text-color: #4b5563;
+--text-color-secondary: #6b7280;
+--primary-color: #3b82f6;
+--primary-color-text: #ffffff;
+--surface-0: #ffffff;
+--surface-50: #f9fafb;
+--surface-100: #f3f4f6;
+--surface-200: #e5e7eb;
+--surface-300: #d1d5db;
+--surface-400: #9ca3af;
+--surface-500: #6b7280;
+--surface-600: #4b5563;
+--surface-700: #374151;
+--surface-800: #1f2937;
+--surface-900: #111827;
+--gray-50: #f9fafb;
+--gray-100: #f3f4f6;
+--gray-200: #e5e7eb;
+--gray-300: #d1d5db;
+--gray-400: #9ca3af;
+--gray-500: #6b7280;
+--gray-600: #4b5563;
+--gray-700: #374151;
+--gray-800: #1f2937;
+--gray-900: #111827;
+--content-padding: 1.25rem;
+--inline-spacing: 0.5rem;
+--border-radius: 6px;
+--surface-ground: #f9fafb;
+--surface-section: #ffffff;
+--surface-card: #ffffff;
+--surface-overlay: #ffffff;
+--surface-border: #dfe7ef;
+--surface-hover: #f6f9fc;
+--focus-ring: 0 0 0 0.2rem #bfdbfe;
+--maskbg: rgba(0, 0, 0, 0.4);
+--highlight-bg: #eff6ff;
+--highlight-text-color: #1d4ed8;
+color-scheme: light;
+} */
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Raleway", serif;
+  letter-spacing: 0.5px;
+  font-family: var(--font-family)!important;
 }
 
 ::-webkit-scrollbar-track {
@@ -28,7 +102,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  height: 5px;
   background-color: #F5F5F5;
 }
 
@@ -50,4 +125,43 @@ body {
 
 .p-password-panel{
   padding: 1rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.theme_button{
+  padding: 0.65rem 1.25rem;
+  border: 1px solid var(--pri-text-color);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.theme_button:hover{
+  background-color: var(--pri-bg);
+  border-radius: 2rem;
+  color: var(--base-color);
+  border: 1px solid var(--pri-color);
+}
+.theme_button:active{
+  background-color: var(--pri-bg);
+  border-radius: 2rem;
+  color: var(--base-color);
+  border: 1px solid var(--pri-color);
+}
+
+.undeline_span {
+  border: solid transparent;
+  border-bottom: solid var(--pri-bg);
+  border-width: 1px 1px 3px 1px;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.5s ease; /* Add transition for all properties */
+}
+
+.undeline_span:hover {
+  background-color: var(--pri-bg);
+  color: var(--base-color);
+  border: 1px solid var(--base-color);
 }

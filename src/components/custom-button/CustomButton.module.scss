@@ -7,8 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0.25rem;
     transition: 0.25s all;
+    letter-spacing: 0.5px;
   
     .btnLabel {
       display: inline-block;
@@ -112,33 +112,33 @@
   
   // Primary Button Styles
   .themeButton_primary_1 {
-    border-color: var(--primary-color);
+    border-color: var(--pri-color);
     background-color: transparent;
   
     .btnLabel {
-      color: var(--primary-color);
+      color: var(--base-color);
     }
   
     .btnIcon {
       .pi,
       i {
-        color: var(--primary-color);
+        color: var(--base-color);
       }
     }
   }
   
   .themeButton_primary_0 {
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
+    border-color: var(--pri-color);
+    background-color: var(--pri-color);
   
     .btnLabel {
-      color: var(--themeInnColorText);
+      color: var(--base-color);
     }
   
     .btnIcon {
       .pi,
       i {
-        color: var(--themeInnColorText);
+        color: var(--base-color);
       }
     }
   }
