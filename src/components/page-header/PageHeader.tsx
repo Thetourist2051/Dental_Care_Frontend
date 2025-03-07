@@ -5,7 +5,7 @@ import { useState } from "react";
 type TabTypes = "Home" | "About" | "Service";
 
 const PageHeader = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<TabTypes>("Home");
 
   return (

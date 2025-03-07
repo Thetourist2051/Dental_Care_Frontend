@@ -3,6 +3,7 @@ import style from "./ProtectedLayout.module.scss";
 type Props = {};
 
 const ProtectedLayout = (props: Props) => {
+  console.log(props)
   return (
     <>
       <div className={style["render-layout"]}>

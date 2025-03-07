@@ -1,8 +1,7 @@
-import React from 'react'
-
 type Props = {}
 
 const AllUsers = (props: Props) => {
+  console.log(props)
   return (
     <div>AllUsers</div>
   )
