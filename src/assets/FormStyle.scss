@@ -1,65 +1,68 @@
 
 .custom_form {
-    display: block;
+    display: flex;
   }
   
   .custom_form .custom_form_item {
-    width: 100%;
     margin-bottom: 0.25rem;
     margin-top: 0.25rem;
     color: #464646;
     min-height: 5.35rem;
+    width: 100%;
 }
 
 .custom_form .custom_form_label {
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.375rem;
     display: block;
     line-height: 1.25;
+    // color: var(-);
   }
   
   .custom_form .form_input_text {
     width: calc(100% - 1rem);
     width: -webkit-fill-available;
     padding: 0.25rem 0.5rem;
-    border: 1px solid #d3d3d3;
+    border: 1px solid var(--tir-color);
     border-radius: 0.5rem;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     transition: all 0.5s;
     outline: none;
-    font-weight: 400;
-    height: 2.5rem;
-    color: var(--secondary-color);
+    font-weight: 500;
+    height: 2.75rem;
+    letter-spacing: 0.5px;
+    color: var(--pri-text-color);
   }
   
   .custom_form .form_input_number {
     width: calc(100% - 1rem);
     width: -webkit-fill-available;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid #d3d3d3;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--tir-color);
     border-radius: 0.5rem;
     font-size: 0.8rem;
     transition: all 0.5s;
     outline: none;
-    font-weight: 400;
-    height: 2.5rem;
-    color: var(--secondary-color);
+    font-weight: 500;
+    height: 2.75rem;
+    letter-spacing: 0.5px;
+    color: var(--pri-text-color);
   }
   
   .custom_form .form_input_text:focus {
-    border: 1px solid #a3a3a3;
+    border: 1px solid var(--sec-color);
     transition: all 0.5s;
+    box-shadow: 0 0 0 0.2rem #c7d2fe;
   }
 
   .custom_form .form_input_number:focus{
     box-shadow: 0 0 0 0.2rem #c7d2fe;
-    border: 1px solid #a3a3a3;
+    border: 1px solid var(--sec-color);
     transition: all 0.5s;
   }
   
   .custom_form .form_input_text:hover {
-    border: 1px solid #a3a3a3;
+    border: 1px solid var(--sec-color);
     transition: all 0.5s;
   }
   
@@ -67,13 +70,13 @@
     width: calc(100% - 1rem);
     width: -webkit-fill-available;
     padding: 0.25rem 0.5rem;
-    border: 1px solid #d3d3d3;
+    border: 1px solid var(--tir-color);
     border-radius: 0.5rem;
     font-size: 0.8rem;
     transition: all 0.5s;
     outline: none;
-    font-weight: 400;
-    height: 2.5rem;
+    font-weight: 500;
+    height: 2.75rem;
     color: var(--secondary-color);
   }
   
@@ -116,3 +119,7 @@
     color: var(--primary-color);
     text-decoration: underline;
   }
+
+  .p-inputtext.p-invalid.p-component {
+    border-color: #e24c4c !important;
+}

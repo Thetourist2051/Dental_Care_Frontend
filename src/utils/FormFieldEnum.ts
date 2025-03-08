@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
 export interface FormField {
+  field_key?: string;
   name: string;
   type: "text"
     | "password"
@@ -15,4 +16,5 @@ export interface FormField {
   validation?: Yup.AnySchema;
   fieldwidth?: string;
   passwordmeter?: boolean;
+  fieldclass? : string;
 }

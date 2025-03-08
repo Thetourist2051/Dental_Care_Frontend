@@ -7,12 +7,16 @@ import { FormField } from "../../utils/FormFieldEnum";
 import CustomButton from "../../components/custom-button/CustomButton";
 import { useRef, useState } from "react";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { useNavigate } from "react-router";
+import { RouteConstant } from "../../utils/RouteConstant";
 
 type Props = {};
 
 function LoginPage({}: Props) {
   const formRef = useRef<CustomDynamicFormHandle>(null);
   const [checked, setChecked] = useState<boolean>(true);
+  const navigate = useNavigate();
+
   const formFieldsArr: FormField[] = [
     {
       name: "user_email",
@@ -57,14 +61,18 @@ function LoginPage({}: Props) {
   //   }
   // };
 
+  const navigateToSignupPage = ()=>{
+    navigate(RouteConstant.SignupPage,{ replace: false, state: { newuser : true } })
+  } 
+
   return (
     <>
       <div
         className={styles.login_container + " flex justify-center items-center"}
       >
-        <div className={styles.login_box + " py-5 px-7 bg-white rounded-2xl"}>
-          <h4 className="text-2xl mb-4 text-center font-medium">
-            Login To Dental Care
+        <div className={styles.login_box + " py-7 px-7 bg-white rounded-2xl"}>
+          <h4 className="text-2xl mt-0 mb-5 text-center font-bold">
+            Login To <span className="">Dental Care</span>
           </h4>
           <CustomDynamicForm ref={formRef} formFieldsArr={formFieldsArr} />
           <div className="flex justify-between items-center w-full">
@@ -99,7 +107,7 @@ function LoginPage({}: Props) {
           </div>
 
           <div className="flex justify-center items-center my-4 mx-0">
-            <h6 className="checkbox_label">Don't Have a Account ? <span className="checkbox_label-primary cursor-pointer">Signup/Register Here</span></h6>
+            <h6 className="checkbox_label">Don't Have a Account ? <span className="checkbox_label-primary cursor-pointer" onClick={()=>navigateToSignupPage()} >Signup/Register Here</span></h6>
           </div>
         </div>
       </div>

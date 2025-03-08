@@ -21,9 +21,9 @@ const DefaultPageContent = (props: Props) => {
                 " p-4 text-center flex flex-col justify-center items-center"
               }
             >
-              <h3 className="text-4xl mt-2 mb-4 font-bold w-5/6">
+              <h3 className="text-4xl mt-2 mb-4 font-bold">
                 Take your dental health{" "}
-                <span className="underline underline-offset-8">seriously</span>
+                <span className="undeline_span">Seriously !</span>
               </h3>
               <h6 className="text-base mt-2 mb-3 font-medium w-4/6">
                 We offer a wide range of services for your every dental need.
