@@ -3,12 +3,14 @@ import * as Yup from "yup";
 export interface FormField {
   field_key?: string;
   name: string;
-  type: "text"
+  type:
+    | "text"
     | "password"
     | "number"
+    | "date"
     | "textarea"
-    | "single-select"
-    | "multi-select"
+    | "select"
+    | "multiselect"
     | "checkbox"
     | "radio";
   label: string;
@@ -16,5 +18,6 @@ export interface FormField {
   validation?: Yup.AnySchema;
   fieldwidth?: string;
   passwordmeter?: boolean;
-  fieldclass? : string;
+  fieldclass?: string;
+  options?: {label: string, value:any}[]
 }

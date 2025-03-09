@@ -31,7 +31,7 @@ function LoginPage({}: Props) {
       label: "Password",
       passwordmeter: false,
       placeholder: "Type Password...",
-      validation: Yup.string().min(8, "Min length is 8!"),
+      validation: Yup.string().min(8, "Min length is 8!").required(),
     },
   ];
 
@@ -70,12 +70,12 @@ function LoginPage({}: Props) {
       <div
         className={styles.login_container + " flex justify-center items-center"}
       >
-        <div className={styles.login_box + " py-7 px-7 bg-white rounded-2xl"}>
+        <div className={styles.login_box + " lg:p-7 md:p-6 sm:p-4 bg-white rounded-2xl"}>
           <h4 className="text-2xl mt-0 mb-5 text-center font-bold">
             Login To <span className="">Dental Care</span>
           </h4>
           <CustomDynamicForm ref={formRef} formFieldsArr={formFieldsArr} />
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full mt-3">
             <div className="checkbox_class flex items-center">
               <Checkbox
                 id="rememberMe"
