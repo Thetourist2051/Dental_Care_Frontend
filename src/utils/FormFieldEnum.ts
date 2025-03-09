@@ -12,7 +12,8 @@ export interface FormField {
     | "select"
     | "multiselect"
     | "checkbox"
-    | "radio";
+    | "radio"
+    | "inputmask";
   label: string;
   placeholder?: string;
   validation?: Yup.AnySchema;
@@ -20,4 +21,8 @@ export interface FormField {
   passwordmeter?: boolean;
   fieldclass?: string;
   options?: {label: string, value:any}[]
+  mask?:string,
+  rowcount?:number,
+  colcount?:number,
+  info?:string,
 }

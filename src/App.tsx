@@ -3,6 +3,8 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./App.css";
 import "./assets/FormStyle.scss";
+import "./assets/StyledButton.scss";
+import "./assets/Animation.scss";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 import RouterConfig from "./pages/router-config/RouterConfig";
 import Toaster from "./components/toaster/Toaster";

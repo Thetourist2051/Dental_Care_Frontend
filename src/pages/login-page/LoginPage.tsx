@@ -75,7 +75,7 @@ function LoginPage({}: Props) {
             Login To <span className="">Dental Care</span>
           </h4>
           <CustomDynamicForm ref={formRef} formFieldsArr={formFieldsArr} />
-          <div className="flex justify-between items-center w-full mt-3">
+          <div className="flex justify-between items-center w-full mt-3 px-3">
             <div className="checkbox_class flex items-center">
               <Checkbox
                 id="rememberMe"
@@ -90,7 +90,7 @@ function LoginPage({}: Props) {
               </label>
             </div>
             <div className="reset_password">
-              <label htmlFor="rememberMe" className="checkbox_label-primary cursor-pointer">
+              <label htmlFor="rememberMe" className="checkbox_label-primary text-sm cursor-pointer">
                 Forget/Reset Password
               </label>
             </div>

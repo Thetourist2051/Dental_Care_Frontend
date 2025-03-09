@@ -1,0 +1,116 @@
+ .styled_btn1 {
+     position: relative;
+     overflow: hidden;
+     height: 2.75rem;
+     padding: 0 2rem;
+     border-radius: .25rem;
+     background: #3d3a4e;
+     background-size: 400%;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+
+     span {
+         position: relative;
+         z-index: 1;
+         font-size: var(--font-size);
+         font-weight: 500;
+         letter-spacing: var(--letter-spacing);
+         padding-right: 0.5rem;
+     }
+
+     i {
+         z-index: 1;
+     }
+
+     &:hover::before {
+         transform: scaleX(1);
+     }
+
+     &::before {
+         content: "";
+         position: absolute;
+         top: 0;
+         left: 0;
+         transform: scaleX(0);
+         transform-origin: 0 50%;
+         width: 100%;
+         height: inherit;
+         border-radius: inherit;
+         background: linear-gradient(82.3deg,
+                 var(--pri-bg) 10.8%,
+                 var(--pri-color) 94.3%);
+         transition: all 0.5s;
+     }
+ }
+
+
+ .styled_btn2 {
+     font-size: 17px;
+     background: transparent;
+     border: none;
+     outline: none;
+     height: 2.75rem;
+     padding: 0 2rem;
+     color: var(--sec-color);
+     border: 1px solid var(--sec-color);
+     border-radius: 4px;
+     position: relative;
+     transition: 0.5s ease;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+
+     span {
+        position: relative;
+        z-index: 1;
+        font-size: var(--font-size);
+        font-weight: 500;
+        letter-spacing: var(--letter-spacing);
+        padding-left: 0.5rem;
+    }
+
+    i {
+        z-index: 1;
+    }
+ }
+
+ .styled_btn2::before {
+     content: "";
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     height: 1px;
+     width: 0;
+     background-color: var(--sec-color);
+     transition: 0.5s ease;
+ }
+
+ .styled_btn2:hover {
+     color: var(--base-color);
+     transition-delay: 0.5s;
+ }
+
+ .styled_btn2:hover::before {
+     width: 100%;
+ }
+
+ .styled_btn2::after {
+     content: "";
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     height: 0;
+     width: 100%;
+     background-color: var(--sec-color);
+     transition: 0.4s ease;
+     z-index: -1;
+ }
+
+ .styled_btn2:hover::after {
+     height: 100%;
+     transition-delay: 0.4s;
+     color: aliceblue;
+ }
