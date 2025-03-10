@@ -14,8 +14,8 @@ function App() {
     <>
       <div className="init_div">
         <ErrorBoundary>
+          <Toaster></Toaster>
           <RouterConfig></RouterConfig>
-          <Toaster />
         </ErrorBoundary>
       </div>
     </>

@@ -5,9 +5,11 @@ import CustomDynamicForm, {
 import { FormField } from "../../utils/FormFieldEnum";
 import style from "./SignupPage.module.scss";
 import * as Yup from "yup";
+import { useToaster } from "../../context/toaster-context/ToasterContext";
 
 const SignupPage = () => {
   const signupFormRef = useRef<CustomDynamicFormHandle>(null);
+  const toaster = useToaster()
   const signupFormFields: FormField[] = [
     {
       label: "First Name",
@@ -114,10 +116,11 @@ const SignupPage = () => {
     if (signupFormRef.current) {
       const isValid = await signupFormRef.current.triggerValidation();
       if (isValid) {
-        const formValues = signupFormRef.current.getFormValues();
+        let formValues = {};
+        formValues = signupFormRef.current.getFormValues();
         console.log("Form Values:", formValues);
       } else {
-        console.log("Form has errors.");
+        return toaster.addToast('Please fill all required field !', 'error','Error');
       }
     }
   };
