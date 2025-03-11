@@ -4,22 +4,28 @@ import CustomDynamicForm, {
 } from "../../components/custom-dynamic-form/CustomDynamicForm";
 import * as Yup from "yup";
 import { FormField } from "../../utils/FormFieldEnum";
-import CustomButton from "../../components/custom-button/CustomButton";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { useNavigate } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
+import { useToaster } from "../../context/toaster-context/ToasterContext";
+import AxiosService from "../../services/axios-service/AxiosService";
+import { ApiEndpoints } from "../../utils/ApiEndpoints";
+import { GetCookieCredentails, SaveCredentialstoCookie, removeCookieCredentials } from "../../services/cookie-service/CookieService";
 
 type Props = {};
 
 function LoginPage({}: Props) {
   const formRef = useRef<CustomDynamicFormHandle>(null);
   const [checked, setChecked] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const toaster = useToaster();
+  const axios = new AxiosService();
 
   const formFieldsArr: FormField[] = [
     {
-      name: "user_email",
+      name: "email",
       type: "text",
       label: "User Email",
       placeholder: "Type Email...",
@@ -35,42 +41,64 @@ function LoginPage({}: Props) {
     },
   ];
 
+
+  useEffect(() => {
+    const { email, password } = GetCookieCredentails();
+    if (email && password && formRef.current) {
+      formRef.current.setFormValue("email", email);
+      formRef.current.setFormValue("password", password);
+    }
+  }, []);
+
   const handleFormSubmit = async () => {
     if (formRef.current) {
       const isValid = await formRef.current.triggerValidation();
       if (isValid) {
         const formValues = formRef.current.getFormValues();
+        if (checked) {
+          SaveCredentialstoCookie( formValues.email, formValues.password);
+        } else {
+          removeCookieCredentials();
+        }
+
+        setLoading(true);
+
         console.log("Form Values:", formValues);
+        axios.postRequest(ApiEndpoints.Login, formValues)
+          .then((res: any) => {
+            setLoading(false);
+            if (res && res.state == 1) {
+              toaster.addToast(res?.message, "success");
+              navigate(RouteConstant.BookAppoinments);
+            }
+          })
+          .catch((err: any) => {
+            toaster.addToast(err?.message, "error");
+          });
       } else {
         console.log("Form has errors.");
       }
     }
   };
 
-  // const patchFormValue = async () => {
-  //   console.log("formRef.current:", formRef.current);
-  //   if (formRef.current) {
-  //     formRef.current.setFormValue("user_email", "example@example.com");
-  //     console.log("Form Values After Patching:", formRef.current.getFormValues());
-  //   }
-  // };
+  const navigateToSignupPage = () => {
+    navigate(RouteConstant.SignupPage, {
+      replace: false,
+      state: { newuser: true },
+    });
+  };
 
-  // const resetForm = () => {
-  //   if (formRef.current) {
-  //     formRef.current.resetForm();
-  //   }
-  // };
-
-  const navigateToSignupPage = ()=>{
-    navigate(RouteConstant.SignupPage,{ replace: false, state: { newuser : true } })
-  } 
 
   return (
     <>
       <div
         className={styles.login_container + " flex justify-center items-center"}
       >
-        <div className={styles.login_box + " lg:p-7 md:p-6 sm:p-4 bg-white rounded-2xl"}>
+        <div
+          className={
+            styles.login_box + " p-4 md:p-6 lg:p-7 bg-white rounded-2xl"
+          }
+        >
           <h4 className="text-2xl mt-0 mb-5 text-center font-bold">
             Login To <span className="">Dental Care</span>
           </h4>
@@ -90,24 +118,44 @@ function LoginPage({}: Props) {
               </label>
             </div>
             <div className="reset_password">
-              <label htmlFor="rememberMe" className="checkbox_label-primary text-sm cursor-pointer">
+              <label
+                htmlFor="rememberMe"
+                className="checkbox_label-primary text-sm cursor-pointer"
+              >
                 Forget/Reset Password
               </label>
             </div>
           </div>
           <div className="flex justify-center my-4">
-            <CustomButton
-              type="success"
-              icon="check"
-              size="md"
-              label="Submit"
-              styleClass="w-full"
-              onSubmitEvent={handleFormSubmit}
-            />
+            <button
+              className="styled_btn1"
+              disabled={loading}
+              onClick={handleFormSubmit}
+            >
+              {loading ? (
+                <>
+                  <span>Please wait...</span>
+                  <i className="pi pi-spin pi-spinner"></i>
+                </>
+              ) : (
+                <>
+                  <span>Login</span>
+                  <i className="pi pi-arrow-right"></i>
+                </>
+              )}
+            </button>
           </div>
 
           <div className="flex justify-center items-center my-4 mx-0">
-            <h6 className="checkbox_label">Don't Have a Account ? <span className="checkbox_label-primary cursor-pointer" onClick={()=>navigateToSignupPage()} >Signup/Register Here</span></h6>
+            <h6 className="checkbox_label">
+              Don't Have a Account ?{" "}
+              <span
+                className="checkbox_label-primary cursor-pointer"
+                onClick={() => navigateToSignupPage()}
+              >
+                Signup/Register Here
+              </span>
+            </h6>
           </div>
         </div>
       </div>

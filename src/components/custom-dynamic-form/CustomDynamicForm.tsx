@@ -117,7 +117,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
           {formFieldsArr.map((field: FormField) => (
             <div
               key={field.name}
-              className={"iterator_class px-3 " + " " + field.fieldclass}
+              className={"iterator_class px-1 md:px-2 xl:px-3 " + " " + field.fieldclass}
               >
               <div className={"custom_form_item"}>
                 <label
@@ -136,12 +136,10 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                     )}
                   {field.info && (
                     <div
-                      className="inline-block info_class pl-2 leading-none"
+                      className="inline-block info_class pl-2 leading-none cursor-pointer"
                       data-pr-tooltip={field.info}
                     >
-                      <span className="material-symbols-rounded font-light text-[0.75rem] cursor-pointer">
-                        info
-                      </span>
+                      <i className="pi pi-info-circle font-light text-[0.75rem]"></i>
                     </div>
                   )}
                 </label>
@@ -175,8 +173,8 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         value={controllerField.value as string}
                         feedback={field?.passwordmeter}
                         toggleMask={true}
-                        header={field.passwordmeter ? FeedbackHeader : null} // Add FeedbackHeader
-                        footer={field.passwordmeter ? FeedbackFooter : null} // Add FeedbackFooter
+                        header={field.passwordmeter ? FeedbackHeader : null}
+                        footer={field.passwordmeter ? FeedbackFooter : null} 
                       />
                     )}
                   />
@@ -213,7 +211,6 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                     name={field.name}
                     control={control}
                     render={({ field: controllerField }) => {
-                      // Convert the value to a Date object or null
                       const value = controllerField.value
                         ? new Date(controllerField.value)
                         : null;
@@ -225,9 +222,8 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                           className={`form_input_calender`}
                           {...controllerField}
                           placeholder={field.placeholder}
-                          value={value} // Pass the Date object or null
+                          value={value}
                           onChange={(e) => {
-                            // Convert the selected date to a string or null
                             const selectedDate = e.value as Date | null;
                             controllerField.onChange(
                               selectedDate?.toISOString() || null

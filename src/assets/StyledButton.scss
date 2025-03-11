@@ -48,7 +48,6 @@
 
 
  .styled_btn2 {
-     font-size: 17px;
      background: transparent;
      border: none;
      outline: none;
@@ -64,17 +63,17 @@
      align-items: center;
 
      span {
-        position: relative;
-        z-index: 1;
-        font-size: var(--font-size);
-        font-weight: 500;
-        letter-spacing: var(--letter-spacing);
-        padding-left: 0.5rem;
-    }
+         position: relative;
+         z-index: 1;
+         font-size: var(--font-size);
+         font-weight: 500;
+         letter-spacing: var(--letter-spacing);
+         padding-left: 0.5rem;
+     }
 
-    i {
-        z-index: 1;
-    }
+     i {
+         z-index: 1;
+     }
  }
 
  .styled_btn2::before {
@@ -113,4 +112,25 @@
      height: 100%;
      transition-delay: 0.4s;
      color: aliceblue;
+ }
+
+ @media(max-width:426px) {
+     .styled_btn1 {
+         padding: 0 1rem;
+         height: 2.5rem;
+
+         span {
+             font-size: 14px;
+             font-weight: 400;
+         }
+     }
+     .styled_btn2 {
+         padding: 0 1rem;
+         height: 2.5rem;
+
+         span {
+             font-size: 14px;
+             font-weight: 400;
+         }
+     }
  }

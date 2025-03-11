@@ -227,3 +227,16 @@
     }
   }
 }
+
+@media (max-width: 426px){
+  .custom_form{
+    .iterator_class{
+      width: 100%!important;
+      margin-bottom: 1rem!important;
+      .custom_form_item{
+        min-height: auto;
+      }
+    }
+  } 
+
+}
