@@ -4,16 +4,19 @@ import { RouteConstant } from "../../utils/RouteConstant";
 import CustomLoader from "../../components/custom-loader/CustomLoader";
 import ProtectedLayout from "./ProtectedLayout";
 import BookAppoinments from "../book-appoinments/BookAppoinments";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import AllUsers from "../all-users/AllUsers";
+import { AuthProvider } from "../../context/auth-context/AuthContext";
+import BookingHistory from "../booking-history/BookingHistory";
 
 interface Route {
   path: string;
   element: React.ReactNode;
-  id?:any;
+  id?: any;
 }
 
 const RouterConfig = () => {
+  console.log("RouterConfig");
   const DefaultPageCompoment = React.lazy(() => {
     return import("../default-page/DefaultPage");
   });
@@ -50,37 +53,52 @@ const RouterConfig = () => {
       element: <PageNotFoundComponent />,
       id: uuidv4(),
     },
-  ]
+  ];
 
-  const ProtectedRoutes:Route[] = [
+  const ProtectedRoutes: Route[] = [
     {
-      path : RouteConstant.AllUsers,
-      element : <AllUsers />,
+      path: RouteConstant.AllUsers,
+      element: <AllUsers />,
       id: uuidv4(),
     },
     {
       path: RouteConstant.BookAppoinments,
-      element : <BookAppoinments />,
+      element: <BookAppoinments />,
       id: uuidv4(),
-    }
-  ]
-
+    },
+    {
+      path: RouteConstant.BookAppoinments,
+      element: <BookAppoinments />,
+      id: uuidv4(),
+    },
+    {
+      path: RouteConstant.BookAppoinments,
+      element: <BookingHistory />,
+      id: uuidv4(),
+    },
+  ];
 
   return (
-    <BrowserRouter>
-      <React.Suspense fallback={<CustomLoader />}>
-        <Routes>
-          {routes.map((route:Route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
-          ))}
-          <Route element={<ProtectedLayout />} >
-          {ProtectedRoutes.map((route:Route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
-          ))}
-          </Route>
-        </Routes>
-      </React.Suspense>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <React.Suspense fallback={<CustomLoader />}>
+          <Routes>
+            {routes.map((route: Route) => (
+              <Route key={route.id} path={route.path} element={route.element} />
+            ))}
+            <Route element={<ProtectedLayout />}>
+              {ProtectedRoutes.map((route: Route) => (
+                <Route
+                  key={route.id}
+                  path={route.path}
+                  element={route.element}
+                />
+              ))}
+            </Route>
+          </Routes>
+        </React.Suspense>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

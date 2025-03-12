@@ -36,9 +36,9 @@ const Toaster: React.FC = () => {
               ></i>
             </div>
             <div className={toasterstyle.toast_message}>
-              {toast.summary && (
+              {toast?.summary && (
                 <h6 className="font-semibold mb-1 mt-0 text-base">
-                  {toast.summary}
+                  {toast?.summary}
                 </h6>
               )}
               <p className="font-medium mt-0 mb-0 text-[0.875rem] leading-4">
@@ -49,7 +49,7 @@ const Toaster: React.FC = () => {
               className={toasterstyle.toast_close}
               onClick={() => removeToast(toast.id)}
             >
-              <span className="material-symbols-rounded font-extralight">close</span>
+              <i className="pi pi-times"></i>
             </div>
           </div>
         </div>

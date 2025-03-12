@@ -7,7 +7,7 @@ type PositionType = "top-right" | "top-left" | "bottom-right" | "bottom-left";
 type Toast = {
     message: string;
     type: "success" | "warning" | "error" | "info";
-    summary?:string;
+    summary?:string | undefined | null;
     duration?: number;
     position? : PositionType;
     id: number;
@@ -15,7 +15,7 @@ type Toast = {
 
 type ToasterContextType = {
   toasts: Toast[];
-  addToast: (message: string, type: ToasterType, summary?:string, duration?:number, position?: PositionType) => void;
+  addToast: (message: string, type: ToasterType, summary?:string|undefined|null, duration?:number, position?: PositionType) => void;
   removeToast: (id: number) => void;
 };
 

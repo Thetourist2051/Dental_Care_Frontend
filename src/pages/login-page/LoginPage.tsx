@@ -10,8 +10,15 @@ import { useNavigate } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
 import AxiosService from "../../services/axios-service/AxiosService";
-import { ApiEndpoints } from "../../utils/ApiEndpoints";
-import { GetCookieCredentails, SaveCredentialstoCookie, removeCookieCredentials } from "../../services/cookie-service/CookieService";
+import {
+  GetCookieCredentails,
+  SaveCredentialstoCookie,
+  removeCookieCredentials,
+  setAuthToken,
+  setRefreshToken,
+} from "../../services/cookie-service/CookieService";
+import { useAuth } from "../../context/auth-context/AuthContext";
+import { GlobalService } from "../../services/global-service/GlobalService";
 
 type Props = {};
 
@@ -22,6 +29,7 @@ function LoginPage({}: Props) {
   const navigate = useNavigate();
   const toaster = useToaster();
   const axios = new AxiosService();
+  const { Login } = useAuth();
 
   const formFieldsArr: FormField[] = [
     {
@@ -41,7 +49,6 @@ function LoginPage({}: Props) {
     },
   ];
 
-
   useEffect(() => {
     const { email, password } = GetCookieCredentails();
     if (email && password && formRef.current) {
@@ -55,28 +62,47 @@ function LoginPage({}: Props) {
       const isValid = await formRef.current.triggerValidation();
       if (isValid) {
         const formValues = formRef.current.getFormValues();
+
         if (checked) {
-          SaveCredentialstoCookie( formValues.email, formValues.password);
+          SaveCredentialstoCookie(formValues.email, formValues.password);
         } else {
           removeCookieCredentials();
         }
 
         setLoading(true);
 
-        console.log("Form Values:", formValues);
-        axios.postRequest(ApiEndpoints.Login, formValues)
-          .then((res: any) => {
-            setLoading(false);
-            if (res && res.state == 1) {
-              toaster.addToast(res?.message, "success");
-              navigate(RouteConstant.BookAppoinments);
+        try {
+          const response = await axios.postRequest(
+            "http://localhost:4001/login",
+            formValues,
+            {
+              withCredentials: true,
             }
-          })
-          .catch((err: any) => {
-            toaster.addToast(err?.message, "error");
-          });
+          );
+
+          console.log("Login Response:", response);
+          setLoading(false);
+
+          if (response.state === 1) {
+            setAuthToken(response.accessToken);
+            setRefreshToken(response.refreshToken);
+            GlobalService.userInfo.next(response?.userInfo);
+            Login(response.accessToken, response.refreshToken);
+            toaster.addToast(response.message, "success", null, 800000);
+            return navigate(RouteConstant.BookAppoinments);
+          } else {
+            toaster.addToast(response?.message, "error");
+          }
+        } catch (error: any) {
+          console.error("Login Error:", error);
+          toaster.addToast(
+            error?.message || "An error occurred during login.",
+            "error"
+          );
+        }
       } else {
         console.log("Form has errors.");
+        setLoading(false);
       }
     }
   };
@@ -87,7 +113,6 @@ function LoginPage({}: Props) {
       state: { newuser: true },
     });
   };
-
 
   return (
     <>

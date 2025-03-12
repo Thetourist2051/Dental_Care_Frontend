@@ -1,42 +1,91 @@
 import style from "./PageHeader.module.scss";
 import { ImageUrls } from "../../utils/ImageUrls";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
 import { useNavigate } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
 import { TypescriptEnum } from "../../utils/TypescriptEnum";
-
+import { GlobalService } from "../../services/global-service/GlobalService";
+import { useAuth } from "../../context/auth-context/AuthContext";
 
 const PageHeader = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<TypescriptEnum["TabTypes"]>("Home");
+  const [activeTab, setActiveTab] =
+    useState<TypescriptEnum["TabTypes"]>("Home");
   const LoginMenu = useRef<Menu>(null);
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState(GlobalService.userInfo.getValue());
+  const { Logout } = useAuth();
+  const [profileActions, setProfileActions] = useState<MenuItem[]>([]);
 
-  const items: MenuItem[] = [
+  const CommonItem = [
     {
-        label: 'Options',
-        items: [
-            {
-                label: 'Login',
-                icon: 'pi pi-sign-in',
-                command :()=> {
-                  navigate(RouteConstant.LoginPage, {replace: true, state: '1'})
-                },
-            },
-            {
-                label: 'Export',
-                icon: 'pi pi-upload'
-            }
-        ]
-    }
-];
+      label: "Book Appointments",
+      icon: "pi pi-plus",
+      command: () => {
+        navigate(RouteConstant.BookAppoinments, { replace: true });
+      },
+    },
+  ];
+  const LoginItem = [
+    {
+      label: "Login",
+      icon: "pi pi-sign-in",
+      command: () => {
+        navigate(RouteConstant.LoginPage, { replace: true });
+      },
+    },
+  ];
 
-  
+  const LogoutItem = [
+    {
+      label: "Logout",
+      icon: "pi pi-sign-out",
+      command: () => {
+        Logout();
+      },
+    },
+    {
+      label: "Profile",
+      icon: "pi pi-user",
+      command: () => {
+        navigate(RouteConstant.Profilepage);
+      },
+    },
+  ];
+
+  useEffect(() => {
+    const subscription = GlobalService.userInfo.subscribe((data) => {
+      setUserInfo(data);
+      if (data) {
+        setProfileActions([
+          {
+            label: "Options",
+            items: [...LogoutItem, ...CommonItem],
+          },
+        ]);
+      } else {
+        setProfileActions([
+          {
+            label: "Options",
+            items: [...LoginItem, ...CommonItem],
+          },
+        ]);
+      }
+    });
+    console.log("UserInfo", userInfo);
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <>
-    <Menu model={items} popup ref={LoginMenu} closeOnEscape={true}  id="LoginMenu" />
+      <Menu
+        model={profileActions}
+        popup
+        ref={LoginMenu}
+        closeOnEscape={true}
+        id="LoginMenu"
+      />
       <div className={style["top_header"] + " w-full"}>
         <div className="container m-auto">
           <div className="flex flex-row justify-between w-full items-center p-4 m-0">
@@ -78,7 +127,22 @@ const PageHeader = () => {
                 " font-light cursor-pointer px-2 flex justify-end items-center w-[200px]"
               }
             >
-              <span className="material-symbols-rounded" onClick={(event) => LoginMenu && LoginMenu.current && LoginMenu.current.toggle(event)} aria-controls="LoginMenu" aria-haspopup >account_circle</span>
+              <div
+                className={style["profile-avater"]}
+                onClick={(event) =>
+                  LoginMenu &&
+                  LoginMenu.current &&
+                  LoginMenu.current.toggle(event)
+                }
+                aria-controls="LoginMenu"
+                aria-haspopup
+              >
+                {userInfo ? (
+                  <span>{userInfo?.fullname[0]}</span>
+                ) : (
+                  <i className="pi pi-user"></i>
+                )}
+              </div>
             </div>
           </div>
         </div>

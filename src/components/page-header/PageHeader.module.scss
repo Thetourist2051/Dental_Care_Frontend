@@ -1,68 +1,100 @@
-.top_header{
+.top_header {
     background-color: var(--sec-bg);
     box-sizing: border-box;
 }
-.header-nav{
+
+.header-nav {
     box-sizing: border-box;
     color: var(--base-color);
 
-    ul{
+    ul {
         list-style: none;
         margin: 0;
         padding-inline-start: 0;
 
-        li{
+        li {
             margin: 0 0.5rem;
         }
     }
 
 }
 
-.nav-li{
+.nav-li {
     border-bottom: 2px solid transparent;
     transition: 0.5s;
     color: var(--base-color);
     font-weight: 600;
     cursor: pointer;
     letter-spacing: 0.25px;
-    &:hover{
+
+    &:hover {
         border-bottom: 2px solid var(--pri-color);
         color: var(--pri-color);
     }
 }
-.activeli{
+
+.activeli {
     border-bottom: 2px solid var(--pri-color);
     color: var(--pri-color);
 }
 
 .header-logo {
-    padding:  0 0.5rem;
+    padding: 0 0.5rem;
     display: flex;
     align-items: center;
-    img{
+
+    img {
         max-width: 5rem;
         max-height: 4rem;
         object-fit: contain;
         padding-right: 0.5rem;
     }
-    h6{
+
+    h6 {
         font-weight: 600;
         margin: 0;
         color: var(--base-color);
         transition: 0.5s;
     }
-    &:hover h6{
+
+    &:hover h6 {
         color: var(--pri-color);
         transition: 0.5s;
     }
 }
 
-.profile-section{
+.profile-section {
     box-sizing: border-box;
-    span{
-        font-size: 2.75rem;
+
+    .profile-avater {
+
+        width: 2.75rem;
+        height: 2.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid white;
+        padding: 0.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--pri-bg);
+            transition: all 0.5s;
+            font-weight: 500;
+        }
+    }
+
+    span {
+
+        font-size: 1.5rem;
+        color: var(--base-color);
+        font-weight: 400;
+    }
+
+    i {
+        font-size: 1.5rem;
         color: var(--base-color);
         font-weight: 300;
     }
-
 }

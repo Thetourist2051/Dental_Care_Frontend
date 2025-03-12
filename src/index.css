@@ -11,16 +11,6 @@
   font-family: "Raleway", serif;
 }
 
-h1,h2,h3,h4,h5,h6{
-  /* margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-block-start: 0;
-  padding-block-end: 0;
-  padding-inline-start: 0px;
-  padding-inline-end: 0px; */
-}
 
 :root {
   --pri-color: #eb6b0e;
@@ -127,4 +117,22 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.5px;
+}
+
+
+#LoginMenu{
+  margin-top: 0.5rem;
+  padding: 0!important;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+#LoginMenu .p-submenu-header{
+  border-bottom: 1px solid #dfdfdf;
+}
+#LoginMenu .p-menuitem > .p-menuitem-content .p-menuitem-link {
+  padding: 0.875rem 1.25rem;
+}
+#LoginMenu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text{
+  font-size: 0.875rem;
+  font-weight: 600;
 }

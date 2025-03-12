@@ -1,4 +1,4 @@
 export const ApiEndpoints = {
-    SignupApi : 'signup',
+    Signup : 'signup',
     Login : 'login',
 }
