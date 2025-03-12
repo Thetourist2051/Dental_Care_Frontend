@@ -1,13 +1,13 @@
+import { useNavigate } from "react-router";
 import { ImageUrls } from "../../utils/ImageUrls";
 import CustomButton from "../custom-button/CustomButton";
 import style from "./DefaultPageContent.module.scss";
+import { RouteConstant } from "../../utils/RouteConstant";
 
-type Props = {};
-
-const DefaultPageContent = (props: Props) => {
-  console.log(props);
+const DefaultPageContent = () => {
+  const navigate = useNavigate();
   const onAppointmentClick = () => {
-    console.log("On Appoinment button click");
+    navigate(RouteConstant.BookAppoinments);
   };
 
   return (
@@ -86,16 +86,15 @@ const DefaultPageContent = (props: Props) => {
       <div className={style.third_content + " w-full"}>
         <div className="container h-full w-full m-auto">
           <div className="flex flex-wrap h-full">
-            <div className="md:w-6/12 sm:w-full px-[5%] border flex flex-col justify-center items-start p-4">
+            <div className="md:w-6/12 sm:w-full px-[5%] flex flex-col justify-center items-start p-4">
               <h4 className="text-3xl mt-0 mb-4">
                 Meet <br />
-                Dr. Maria{" "}
-                <span className="undeline_span"> Chishty</span>
+                Dr. Maria <span className="undeline_span"> Chishty</span>
               </h4>
               <h6 className="text-xl w-4/6 font-semibold my-4 text-left">
                 General Dentist
               </h6>
-              <p className="text-base font-normal my-2 text-left" >
+              <p className="text-base font-normal my-2 text-left">
                 Dr. Maria Chishty is committed to providing high-quality and
                 affordable dental care to patients of all ages. She believes in
                 a personalized approach and always makes sure her clients
@@ -107,7 +106,7 @@ const DefaultPageContent = (props: Props) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default DefaultPageContent;

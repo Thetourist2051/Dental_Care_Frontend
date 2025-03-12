@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import style from "./PageNotFound.module.scss"
+import { ImageUrls } from "../../utils/ImageUrls";
 
 const PageNotFound = (): React.ReactElement => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const PageNotFound = (): React.ReactElement => {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>404</h1>
+      <img className="h-[250px]" src={ImageUrls.pagenotfound} alt="" />
       <p className={style.message}>
         Oops! The page you're looking for doesn't exist.
       </p>

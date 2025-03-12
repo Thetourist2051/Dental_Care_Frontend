@@ -122,9 +122,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 #LoginMenu{
   margin-top: 0.5rem;
-  padding: 0!important;
+  padding: 0 0 0.5rem!important;
   border-radius: 0.75rem;
   overflow: hidden;
+  width: 220px;
 }
 #LoginMenu .p-submenu-header{
   border-bottom: 1px solid #dfdfdf;
