@@ -95,6 +95,7 @@ function LoginPage({}: Props) {
           }
         } catch (error: any) {
           console.error("Login Error:", error);
+          setLoading(false);
           toaster.addToast(
             error?.message || "An error occurred during login.",
             "error"

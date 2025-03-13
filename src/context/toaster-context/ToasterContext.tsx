@@ -34,7 +34,7 @@ export const ToasterProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const addToast = (message: string, type: ToasterType, summary?:string, duration?:number, position?: PositionType) => {
+  const addToast = (message: string, type: ToasterType, summary?:string|undefined|null, duration?:number, position?: PositionType) => {
     const id = Date.now();
     duration = duration ?? 5000;
     position = position ?? "top-right";

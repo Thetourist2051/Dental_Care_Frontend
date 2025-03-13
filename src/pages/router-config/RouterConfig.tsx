@@ -1,38 +1,35 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
-import CustomLoader from "../../components/custom-loader/CustomLoader";
 import ProtectedLayout from "./ProtectedLayout";
-import BookAppoinments from "../book-appoinments/BookAppoinments";
 import { v4 as uuidv4 } from "uuid";
-import AllUsers from "../all-users/AllUsers";
 import { AuthProvider } from "../../context/auth-context/AuthContext";
-import BookingHistory from "../booking-history/BookingHistory";
-
-interface Route {
-  path: string;
-  element: React.ReactNode;
-  id?: any;
-}
+import { RouteInterface } from "../../utils/TypescriptEnum";
+import CustomLoader from "../../components/custom-loader/CustomLoader";
 
 const RouterConfig = () => {
   console.log("RouterConfig");
-  const DefaultPageCompoment = React.lazy(() => {
-    return import("../default-page/DefaultPage");
-  });
+  const DefaultPageCompoment = React.lazy(
+    () => import("../default-page/DefaultPage")
+  );
+  const LoginPageComponent = React.lazy(
+    () => import("../login-page/LoginPage")
+  );
+  const SignupPageComponent = React.lazy(
+    () => import("../signup-page/SignupPage")
+  );
+  const PageNotFoundComponent = React.lazy(
+    () => import("../page-not-found/PageNotFound")
+  );
+  const AllUsers = React.lazy(() => import("../all-users/AllUsers"));
+  const BookAppoinments = React.lazy(
+    () => import("../book-appoinments/BookAppoinments")
+  );
+  const BookingHistory = React.lazy(
+    () => import("../booking-history/BookingHistory")
+  );
 
-  const LoginPageComponent = React.lazy(() => {
-    return import("../login-page/LoginPage");
-  });
-
-  const SignupPageComponent = React.lazy(() => {
-    return import("../signup-page/SignupPage");
-  });
-  const PageNotFoundComponent = React.lazy(() => {
-    return import("../page-not-found/PageNotFound");
-  });
-
-  const routes: Route[] = [
+  const routes: RouteInterface[] = [
     {
       path: RouteConstant.DefaultPage,
       element: <DefaultPageCompoment />,
@@ -48,33 +45,30 @@ const RouterConfig = () => {
       element: <SignupPageComponent />,
       id: uuidv4(),
     },
-    {
-      path: "*",
-      element: <PageNotFoundComponent />,
-      id: uuidv4(),
-    },
+    { path: "*", element: <PageNotFoundComponent />, id: uuidv4() },
   ];
 
-  const ProtectedRoutes: Route[] = [
+  const ProtectedRoutes: RouteInterface[] = [
     {
       path: RouteConstant.AllUsers,
       element: <AllUsers />,
+      modulename: "All Users",
       id: uuidv4(),
+      moduleicon: "pi pi-users"
     },
     {
       path: RouteConstant.BookAppoinments,
       element: <BookAppoinments />,
+      modulename: "Book Appoinments",
       id: uuidv4(),
+      moduleicon: "pi pi-plus-circle"
     },
     {
-      path: RouteConstant.BookAppoinments,
-      element: <BookAppoinments />,
-      id: uuidv4(),
-    },
-    {
-      path: RouteConstant.BookAppoinments,
+      path: RouteConstant.BookingHistory,
       element: <BookingHistory />,
+      modulename: "Booking History",
       id: uuidv4(),
+      moduleicon:" pi pi-history"
     },
   ];
 
@@ -83,11 +77,13 @@ const RouterConfig = () => {
       <BrowserRouter>
         <React.Suspense fallback={<CustomLoader />}>
           <Routes>
-            {routes.map((route: Route) => (
+            {routes.map((route: RouteInterface) => (
               <Route key={route.id} path={route.path} element={route.element} />
             ))}
-            <Route element={<ProtectedLayout />}>
-              {ProtectedRoutes.map((route: Route) => (
+            <Route
+              element={<ProtectedLayout ProtectedRoutes={ProtectedRoutes} />}
+            >
+              {ProtectedRoutes.map((route: RouteInterface) => (
                 <Route
                   key={route.id}
                   path={route.path}

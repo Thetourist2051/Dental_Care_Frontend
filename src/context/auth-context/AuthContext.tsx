@@ -19,9 +19,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
   const axios = new AxiosService();
@@ -31,9 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const storedToken = getAuthToken();
       if (storedToken) {
         try {
-          const response = await axios.postRequest("/validate-token", {
-            authToken: storedToken,
-          });
+          const response = await axios.postRequest("/validate-token", { authToken: storedToken });
           if (response.state === 1) {
             GlobalService.userInfo.next(response?.userInfo);
             setToken(storedToken);
@@ -55,15 +51,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     validateToken();
   }, []);
 
-  // Silent refresh logic to handle token expiry
   useEffect(() => {
     const silentRefresh = async () => {
       const storedRefreshToken = getRefreshToken();
       if (storedRefreshToken) {
         try {
-          const response = await axios.postRequest("validate/refresh-token", {
-            refreshToken: storedRefreshToken,
-          });
+          const response = await axios.postRequest("validate/refresh-token", { refreshToken: storedRefreshToken });
           const newAuthToken = response.data.authToken;
           setToken(newAuthToken);
           setAuthToken(newAuthToken);
