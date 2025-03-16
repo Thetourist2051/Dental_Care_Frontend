@@ -2,8 +2,9 @@ export const RouteConstant = {
     DefaultPage: '/',
     LoginPage: '/login',
     SignupPage: '/signup',
-    Profilepage : '/profile',
-    AllUsers: '/all-users',
-    BookAppoinments : '/book-appoinments',
-    BookingHistory : '/booking-history',
-}
+  
+    Profilepage: '/dental-care/profile',
+    AllUsers: '/dental-care/all-users',
+    BookAppoinments: '/dental-care/book-appoinments',
+    BookingHistory: '/dental-care/booking-history',
+  };

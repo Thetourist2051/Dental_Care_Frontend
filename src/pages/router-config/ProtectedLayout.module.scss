@@ -1,4 +1,4 @@
-.render-layout{
+.render-layout {
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
@@ -6,26 +6,90 @@
     padding: 0;
     overflow: hidden;
     display: flex;
-}
-.sidenav-section{
-    width: 230px;
-    height: 100vh;
-    .nav_item{
-        padding: 0.75rem 0.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        display: block;
-        line-height: 1.5;
-        text-decoration: none;
-        
-    }
-}
-.outlet-section{
-    width:calc(100vw - 230px);
-    height: 100vh;
+    --header_height: 4rem;
 }
 
-.scrollable-outlet-section{
-   height: calc(100vh - 3rem);
-   width: 100%;
+.sidenav-section {
+    width: 230px;
+    height: 100vh;
+
+    .logo_section {
+        height: 5rem;
+    }
+
+    .logout_section {
+        height: 4rem;
+    }
+
+    .nav_scroll_section {
+        height: calc(100vh - 9rem);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .nav_item {
+        text-decoration: none;
+        line-height: 1.25;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .active_arrow {
+            transform: translateX(0px);
+            transition:  transform 0.5s;
+        }
+
+        .hide_arrow {
+            transform: translateX(-220px);
+        }
+
+        span{
+            width: calc(100% - 00px);
+            display: inline-block;
+        }
+
+    }
+
+}
+
+.outlet_section {
+    width: calc(100vw - 230px);
+    height: 100vh;
+
+    .outlet_header {
+        height: var(--header_height);
+
+        .profile_avater {
+            width: 2.75rem;
+            height: 2.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+    }
+
+    .scrollable_section {
+        height: calc(100vh - var(--header_height));
+        width: 100%;
+    }
+}
+
+
+@media (max-width:426px) {
+    .sidenav-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .outlet_section {
+        width: 100%;
+    }
 }

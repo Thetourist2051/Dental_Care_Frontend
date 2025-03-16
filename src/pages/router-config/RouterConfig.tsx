@@ -54,21 +54,21 @@ const RouterConfig = () => {
       element: <AllUsers />,
       modulename: "All Users",
       id: uuidv4(),
-      moduleicon: "pi pi-users"
+      moduleicon: "pi pi-users",
     },
     {
       path: RouteConstant.BookAppoinments,
       element: <BookAppoinments />,
       modulename: "Book Appoinments",
       id: uuidv4(),
-      moduleicon: "pi pi-plus-circle"
+      moduleicon: "pi pi-plus-circle",
     },
     {
       path: RouteConstant.BookingHistory,
       element: <BookingHistory />,
       modulename: "Booking History",
       id: uuidv4(),
-      moduleicon:" pi pi-history"
+      moduleicon: " pi pi-history",
     },
   ];
 

@@ -120,20 +120,24 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-#LoginMenu{
+.p-menu{
   margin-top: 0.5rem;
   padding: 0 0 0.5rem!important;
   border-radius: 0.75rem;
   overflow: hidden;
   width: 220px;
 }
-#LoginMenu .p-submenu-header{
+.p-menu .p-submenu-header{
   border-bottom: 1px solid #dfdfdf;
 }
-#LoginMenu .p-menuitem > .p-menuitem-content .p-menuitem-link {
+.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link {
   padding: 0.875rem 1.25rem;
 }
-#LoginMenu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text{
+.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text{
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.transition{
+  transition:all 0.5s ease-in-out;
 }
