@@ -13,12 +13,15 @@ import AxiosService from "../../services/axios-service/AxiosService";
 import {
   GetCookieCredentails,
   SaveCredentialstoCookie,
+  getAuthToken,
   removeCookieCredentials,
   setAuthToken,
-  setRefreshToken,
 } from "../../services/cookie-service/CookieService";
-import { useAuth } from "../../context/auth-context/AuthContext";
 import { GlobalService } from "../../services/global-service/GlobalService";
+import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { adduser } from "../../utils/redux-store/userslice";
 
 type Props = {};
 
@@ -29,7 +32,7 @@ function LoginPage({}: Props) {
   const navigate = useNavigate();
   const toaster = useToaster();
   const axios = new AxiosService();
-  const { Login } = useAuth();
+  const dispatch = useDispatch()
 
   const formFieldsArr: FormField[] = [
     {
@@ -68,38 +71,18 @@ function LoginPage({}: Props) {
         } else {
           removeCookieCredentials();
         }
-
         setLoading(true);
-
-        try {
-          const response = await axios.postRequest(
-            "http://localhost:4001/login",
-            formValues,
-            {
-              withCredentials: true,
-            }
-          );
-
-          console.log("Login Response:", response);
+        const res = await axios.postRequest(ApiEndpoints.Login,formValues,UserAuthConfig);
+        if (res.state === 1) {
+          setAuthToken(res?.token)
+          console.log(getAuthToken(), "afridi");
+          GlobalService.userInfo.next(res?.userInfo);
+          dispatch(adduser(res?.userInfo))
+          toaster.addToast(res.message, "success");
           setLoading(false);
-
-          if (response.state === 1) {
-            setAuthToken(response.accessToken);
-            setRefreshToken(response.refreshToken);
-            GlobalService.userInfo.next(response?.userInfo);
-            Login(response.accessToken, response.refreshToken);
-            toaster.addToast(response.message, "success", null, 800000);
-            return navigate(RouteConstant.BookAppoinments);
-          } else {
-            toaster.addToast(response?.message, "error");
-          }
-        } catch (error: any) {
-          console.error("Login Error:", error);
+          return navigate(RouteConstant.BookAppoinments);
+        }else{
           setLoading(false);
-          toaster.addToast(
-            error?.message || "An error occurred during login.",
-            "error"
-          );
         }
       } else {
         console.log("Form has errors.");

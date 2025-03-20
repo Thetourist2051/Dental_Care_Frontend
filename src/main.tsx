@@ -8,11 +8,11 @@ import { ToasterProvider } from "./context/toaster-context/ToasterContext";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
-      <PrimeReactProvider>
-        <ToasterProvider>
-          <App />
-        </ToasterProvider>
-      </PrimeReactProvider>
+    <PrimeReactProvider>
+      <ToasterProvider>
+        <App />
+      </ToasterProvider>
+    </PrimeReactProvider>
     {/* <React.StrictMode>
     </React.StrictMode> */}
   </>

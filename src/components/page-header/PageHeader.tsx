@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
 import { TypescriptEnum } from "../../utils/TypescriptEnum";
 import { GlobalService } from "../../services/global-service/GlobalService";
-import { useAuth } from "../../context/auth-context/AuthContext";
+// import { useAuth } from "../../context/auth-context/AuthContext";
 
 const PageHeader = () => {
   const [activeTab, setActiveTab] =
@@ -15,7 +15,9 @@ const PageHeader = () => {
   const LoginMenu = useRef<Menu>(null);
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(GlobalService.userInfo.getValue());
-  const { Logout } = useAuth();
+  const  Logout  = ()=>{
+    console.log('in logout section')
+  }
   const [profileActions, setProfileActions] = useState<MenuItem[]>([]);
 
   const CommonItem = [

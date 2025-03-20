@@ -1,5 +1,11 @@
 export const ApiEndpoints = {
-    Signup : 'signup',
-    Login : 'login',
-    Alluser : 'all-users'
-}
+  Signup: "signup",
+  Login: "login",
+  Logout: "logout",
+  Alluser: "all-users",
+  FetchProfile : 'fetch-profile'
+};
+
+export const UserAuthConfig = {
+  withCredentials: true,
+};

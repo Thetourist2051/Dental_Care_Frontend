@@ -1,10 +1,7 @@
-type Props = {}
+import { memo } from "react";
 
-const BookAppoinments = (props: Props) => {
-  console.log(props)
-  return (
-    <div>BookAppoinments</div>
-  )
-}
+const BookAppointments: React.FC = memo(() => {
+  return <div>BookAppointments</div>;
+});
 
-export default BookAppoinments
+export default BookAppointments;

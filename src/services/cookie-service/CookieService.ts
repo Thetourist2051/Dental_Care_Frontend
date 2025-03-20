@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-const AUTH_TOKEN_KEY = "authToken";
+const AUTH_TOKEN_KEY = "authtoken";
 const REFRESH_TOKEN_KEY = "refreshToken";
 
 export const SaveCredentialstoCookie = (email: string, password: string) => {
@@ -29,8 +29,8 @@ export const getRefreshToken = (): string | undefined => {
 
 export const setAuthToken = (token: string, expiresIn?: number): void => {
   const options: Cookies.CookieAttributes = {
-    expires: expiresIn ? expiresIn / (60 * 60 * 24) : 7,
-    secure: true,
+    expires: expiresIn ? expiresIn / (60 * 60 * 24) : 7, //7 days
+    secure: false,
     sameSite: "strict",
   };
 

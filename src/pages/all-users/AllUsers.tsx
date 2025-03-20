@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
-import AxiosService from "../../services/axios-service/AxiosService";
-import { ApiEndpoints } from "../../utils/ApiEndpoints";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
+import AxiosService from "../../services/axios-service/AxiosService";
+import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
 
 const AllUsers = () => {
   console.log("All Users Page");
   const [users, setUsers] = useState<any[]>([]);
-  const axios = new AxiosService();
   const toaster = useToaster();
+  const axios = new AxiosService()
 
-  const GetAllUsersData = async () => {
+  const GetAllUsersData = async() => {
     try {
-      const response = await axios.getRequest(ApiEndpoints.Alluser);
-      if (response && response.state === 1) {
-        toaster.addToast(
-          response?.message || "All users Data Fetched Successfully.",
-          "success"
-        );
-        setUsers(response?.data);
+      const resonse = await axios.getRequest(ApiEndpoints.Alluser,UserAuthConfig)
+      if(resonse && resonse.state == 1){
+        console.log(resonse)
+        setUsers(resonse?.userlist)
       }
-      setUsers([]);
     } catch (error: any) {
       console.error("Login Error:", error);
       toaster.addToast(
@@ -32,7 +28,7 @@ const AllUsers = () => {
   useEffect(() => {
     GetAllUsersData();
   }, []);
-  return <>{users || JSON}</>;
+  return <>Users Page</>;
 };
 
 export default AllUsers;
