@@ -33,6 +33,7 @@ const RouterConfig = () => {
   const BookingHistory = React.lazy(
     () => import("../booking-history/BookingHistory")
   );
+  const ProfilePage = React.lazy(()=> import("../profile-page/ProfilePage"))
 
   const axios = new AxiosService();
   const dispatch = useDispatch();
@@ -112,6 +113,13 @@ const RouterConfig = () => {
       modulename: "Booking History",
       id: uuidv4(),
       moduleicon: "pi pi-history",
+    },
+    {
+      path: RouteConstant.Profilepage,
+      element: <ProfilePage />,
+      modulename: "Profile",
+      id: uuidv4(),
+      moduleicon: "pi pi-user",
     },
   ];
 

@@ -29,7 +29,7 @@
 
   /* default-style */
   --font-size: 0.85rem;
-  --letter-spacing : 0.5px;
+  --letter-spacing: 0.5px;
 }
 
 
@@ -37,8 +37,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  letter-spacing: 0.5px;
-  font-family: var(--font-family)!important;
+  letter-spacing: var(--letter-spacing);
+  font-family: var(--font-family) !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -69,7 +69,7 @@ body {
       color-stop(0.86, rgb(28, 58, 148)));
 }
 
-.p-password-panel{
+.p-password-panel {
   padding: 1rem;
 }
 
@@ -79,19 +79,21 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.theme_button{
+.theme_button {
   padding: 0.65rem 1.25rem;
   border: 1px solid var(--pri-text-color);
   cursor: pointer;
   transition: all 0.5s;
 }
-.theme_button:hover{
+
+.theme_button:hover {
   background-color: var(--pri-bg);
   border-radius: 2rem;
   color: var(--base-color);
   border: 1px solid var(--pri-color);
 }
-.theme_button:active{
+
+.theme_button:active {
   background-color: var(--pri-bg);
   border-radius: 2rem;
   color: var(--base-color);
@@ -103,7 +105,8 @@ input[type=number]::-webkit-outer-spin-button {
   border-bottom: solid var(--pri-bg);
   border-width: 1px 1px 3px 1px;
   padding: 0.25rem 0.5rem;
-  transition: all 0.5s ease; /* Add transition for all properties */
+  transition: all 0.5s ease;
+  /* Add transition for all properties */
   line-height: 1;
 }
 
@@ -113,31 +116,155 @@ input[type=number]::-webkit-outer-spin-button {
   border: 1px solid var(--base-color);
 }
 
-.p-tooltip-text{
+.p-tooltip-text {
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 
 
-.p-menu{
+.p-menu {
   margin-top: 0.5rem;
-  padding: 0 0 0.5rem!important;
+  padding: 0 0 0.5rem !important;
   border-radius: 0.75rem;
   overflow: hidden;
   width: 220px;
 }
-.p-menu .p-submenu-header{
+
+.p-menu .p-submenu-header {
   border-bottom: 1px solid #dfdfdf;
 }
-.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link {
+
+.p-menu .p-menuitem>.p-menuitem-content .p-menuitem-link {
   padding: 0.875rem 1.25rem;
 }
-.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text{
+
+.p-menu .p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-text {
   font-size: 0.875rem;
   font-weight: 600;
 }
 
-.transition{
-  transition:all 0.5s ease-in-out;
+.p-overlaypanel .p-overlaypanel-content{
+  padding: 0.65rem 0.75rem;
+}
+
+.overlay_panel_class ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.overlay_panel_class ul li{
+  display: block;
+}
+.overlay_panel_class ul li .overlayItem{
+  height: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  color: var(--sec-color);
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+.overlay_panel_class ul li .overlayItem:hover{
+  background: var(--color-amber-100);
+  transition: background 0.5s ease-in-out;
+}
+
+.overlay_panel_class ul li .overlayItem .pi{
+  font-size: 1rem;
+}
+.overlay_panel_class ul li .overlayItem h6{
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0 0 0 0.875rem;
+  margin: 0;
+  line-height: 1.25rem;
+}
+
+
+.transition {
+  transition: all 0.5s ease-in-out;
+}
+
+
+.global-table-style {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+.global-table-style .p-datatable-thead {
+  top: 0;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+  font-size: 0.8125rem;
+  height: 0.875rem;
+  width: 0.875rem;
+  color: var(--base-color);
+}
+
+.p-datatable .p-column-header-content {
+  justify-content: space-between;
+}
+
+.global-table-style .p-datatable-thead>tr>th {
+  border-width: 0px 0px 1px 1px !important;
+  border-color: var(--pri-color);
+  background-color: var(--pri-bg);
+  padding: 0.75rem 0.75rem;
+  min-width: 120px;
+}
+
+.global-table-style .p-datatable-tbody>tr>td {
+  border-width: 1px 0px 0px 1px !important;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  padding: 0.75rem 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--text-color);
+}
+
+.global-table-style .p-datatable-thead tr th .p-column-header-content .p-column-title {
+  font-size: 0.875em;
+  font-weight: 600;
+  color: var(--base-color);
+  white-space: nowrap;
+  line-height: 1.25rem;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody>tr.p-row-odd {
+  background: var(--color-amber-100);
+}
+
+.custom_paginator_class .p-dropdown {
+  margin: 0 0.5rem;
+  padding: 0 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+}
+
+.custom_paginator_class .p-dropdown .p-dropdown-label {
+  padding-right: 0.65rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sec-color);
+}
+
+.custom_paginator_class .p-dropdown .p-dropdown-trigger {
+  width: 2.5rem;
+  color: var(--sec-color);
+}
+
+.custom_paginator_class .p-paginator-first, .custom_paginator_class .p-paginator-prev, .custom_paginator_class .p-paginator-current, .custom_paginator_class .p-paginator-next, .p-paginator .p-paginator-last {
+  height: 2rem;
+  min-width: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sec-color);
 }

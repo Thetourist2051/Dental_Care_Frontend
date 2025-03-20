@@ -1,0 +1,66 @@
+.global-filter {
+    border: 1px solid var(--tir-color);
+    background-color: var(--base-color);
+    border-radius: 3rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s ease, width 0.3s ease, box-shadow 0.3s ease;
+    
+    .filter-span {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--sec-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .filter-input {
+        background-color: var(--base-color)!important;
+        border: none;
+        outline: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0rem;
+        transition: width 0.3s ease, opacity 0.3s ease;
+        height: 40px;
+    }
+
+    &:hover {
+        border-radius: 3rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pi-times {
+        font-size: 12px;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .has-value .pi-times {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .no-value .pi-times {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.global-filter.has-value .filter-input {
+    width: 250px;
+    opacity: 1;
+}
+
+.global-filter.no-value .filter-input {
+    width: 0;
+    opacity: 0;
+}
+
+
+.action_section{
+    padding-right: 0.5rem;
+}

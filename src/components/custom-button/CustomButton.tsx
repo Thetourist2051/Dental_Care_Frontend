@@ -1,29 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CustomButton.module.scss'; // Import the SCSS module
+import { ThemeButtonProps } from '../../utils/TypescriptEnum';
 
-type ButtonSize = 'sm' | 'md' | 'xl';
-type ButtonType = 'primary' | 'warning' | 'info' | 'danger' | 'secondary' | 'success';
-type ButtonIconPosition = 'left' | 'right';
-
-interface ThemeButtonProps {
-  size?: ButtonSize;
-  type?: ButtonType;
-  label?: string;
-  icon?: string;
-  iconPosition?: ButtonIconPosition;
-  apihitting?: boolean;
-  apihittingLabel?: string;
-  outline?: boolean;
-  disabled?: boolean;
-  btnStyle?: React.CSSProperties;
-  rounded?: boolean;
-  isPiIcon?: boolean;
-  styleClass?: string;
-  btnHref?: string;
-  isCustomBtn?: boolean;
-  customBtnPath?: string;
-  onSubmitEvent?: () => void;
-}
 
 const CustomButton: React.FC<ThemeButtonProps> = ({
   size = 'md',

@@ -1,5 +1,4 @@
 .themeButton {
-    border-radius: 1.5rem;
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
@@ -21,7 +20,12 @@
       align-items: center;
     }
   }
-  
+  .theme_button_rounded_0{
+    border-radius: 0.25rem;
+  }
+  .theme_button_rounded_1{
+    border-radius: 1.5rem;
+  }
   .onlyIconPresent {
     .btnIcon {
       margin-right: 0 !important;
@@ -30,7 +34,7 @@
   }
   
   .button_sm {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
   
     .btnLabel {
       font-size: 0.625rem;
@@ -51,7 +55,7 @@
   }
   
   .button_md {
-    padding: 0.55rem 1.25rem;
+    padding: 0.65rem 1rem;
   
     .btnLabel {
       font-size: 0.8125rem;

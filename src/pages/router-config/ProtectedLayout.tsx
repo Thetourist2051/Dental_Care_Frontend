@@ -73,7 +73,7 @@ const ProtectedLayout = React.memo(
     useEffect(() => {
       if (ProtectedRoutes?.length) {
         const currentModule = ProtectedRoutes.find((route) =>
-          matchPath(route.path, location.pathname)
+          matchPath({ path: route.path, exact: true }, location.pathname)
         );
         setCurrentRoute(currentModule);
       }
@@ -176,7 +176,7 @@ const ProtectedLayout = React.memo(
                 </div>
               </div>
             </nav>
-            <div className={style.scrollable_section + " transition-all p-3"}>
+            <div className={style.scrollable_section + " transition-all p-4"}>
               <Outlet />
             </div>
           </div>
