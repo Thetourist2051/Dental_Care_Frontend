@@ -1,13 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserInterface } from "../enum-dictionary/UserInterface/UserInteface";
+
+const initialState: UserInterface | null = null;
 
 const userslice = createSlice({
   name: "user",
-  initialState: null,
+  initialState: initialState as UserInterface | null,
   reducers: {
-    adduser: (_state, action) => {
+    adduser: (_state, action: PayloadAction<UserInterface | null>) => {
       return action.payload;
     },
-    removeuser: (_state, _action) => {
+    removeuser: (_state, _action: PayloadAction<void>) => {
       return null;
     },
   },

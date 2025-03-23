@@ -19,7 +19,6 @@ import {
 } from "../../services/cookie-service/CookieService";
 import { GlobalService } from "../../services/global-service/GlobalService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { adduser } from "../../utils/redux-store/userslice";
 
@@ -73,16 +72,18 @@ function LoginPage({}: Props) {
         }
         setLoading(true);
         const res = await axios.postRequest(ApiEndpoints.Login,formValues,UserAuthConfig);
-        if (res.state === 1) {
-          setAuthToken(res?.token)
-          console.log(getAuthToken(), "afridi");
-          GlobalService.userInfo.next(res?.userInfo);
-          dispatch(adduser(res?.userInfo))
-          toaster.addToast(res.message, "success");
+        if(res){
           setLoading(false);
-          return navigate(RouteConstant.BookAppoinments);
-        }else{
-          setLoading(false);
+          if (res.state === 1) {
+            setAuthToken(res?.token)
+            console.log(getAuthToken(), "afridi");
+            GlobalService.userInfo.next(res?.userInfo);
+            dispatch(adduser(res?.userInfo))
+            toaster.addToast(res.message, "success");
+            return navigate(RouteConstant.BookAppoinments);
+          }else if(res.state === -1){
+            toaster.addToast(res.error, "error");
+          }
         }
       } else {
         console.log("Form has errors.");

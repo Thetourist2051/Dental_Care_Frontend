@@ -1,4 +1,4 @@
-import { JSX, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
 import AxiosService from "../../services/axios-service/AxiosService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";

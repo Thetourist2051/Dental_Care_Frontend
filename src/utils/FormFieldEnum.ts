@@ -25,4 +25,5 @@ export interface FormField {
   rowcount?:number,
   colcount?:number,
   info?:string,
+  disabledField?:boolean,
 }

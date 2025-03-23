@@ -14,7 +14,10 @@
     height: 100vh;
 
     .logo_section {
-        height: 5rem;
+        height: 6rem;
+        img{
+            mix-blend-mode: multiply;
+        }
     }
 
     .logout_section {
@@ -22,7 +25,7 @@
     }
 
     .nav_scroll_section {
-        height: calc(100vh - 9rem);
+        height: calc(100vh - 10rem);
         overflow-x: hidden;
         overflow-y: auto;
     }

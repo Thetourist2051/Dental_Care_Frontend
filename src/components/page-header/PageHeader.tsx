@@ -91,9 +91,8 @@ const PageHeader = () => {
       <div className={style["top_header"] + " w-full"}>
         <div className="container m-auto">
           <div className="flex flex-row justify-between w-full items-center p-4 m-0">
-            <div className={style["header-logo"] + " w-[200px]"}>
+            <div className={style["header-logo"] + " w-[175px]"}>
               <img src={ImageUrls.logo} alt="" />
-              <h6 className="text-base">Dental Care</h6>
             </div>
             <div className={style["header-nav"] + " flex-1"}>
               <ul className="m-0 flex items-center justify-center">

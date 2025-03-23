@@ -52,6 +52,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
 
     formFieldsArr = formFieldsArr.map((field: FormField) => ({
       fieldclass: field.fieldclass ?? "w-full",
+      disabledField : field?.disabledField ?? false,
       ...field,
       options: field.options || [],
     }));
@@ -78,7 +79,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
     } = useForm<FormData>({
       resolver: yupResolver(validationSchema),
       mode: "all",
-      defaultValues, // Set default values here
+      defaultValues,
     });
 
     useImperativeHandle(ref, () => ({
@@ -92,7 +93,6 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
       resetForm: (values?: FormData) => reset(values),
     }));
 
-    // Feedback components for the password field
     const FeedbackHeader = (): JSX.Element => (
       <div className="font-bold mb-3">Pick a password</div>
     );
@@ -155,6 +155,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         {...controllerField}
                         placeholder={field.placeholder}
                         value={controllerField.value as string}
+                        disabled={field?.disabledField}
                       />
                     )}
                   />
@@ -175,6 +176,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         toggleMask={true}
                         header={field.passwordmeter ? FeedbackHeader : null}
                         footer={field.passwordmeter ? FeedbackFooter : null} 
+                        disabled={field?.disabledField}
                       />
                     )}
                   />
@@ -186,6 +188,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                       <input
                         type="number"
                         id={field.name}
+                        disabled={field?.disabledField}
                         className={`form_input_number ${
                           errors[field.name] ? "p-invalid" : ""
                         }`}
@@ -230,6 +233,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                             );
                           }}
                           showIcon={true}
+                          disabled={field?.disabledField}
                         />
                       );
                     }}
@@ -249,6 +253,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                               inputId={option.value}
                               name={controllerField.name}
                               value={option.value}
+                              disabled={field?.disabledField}
                               onChange={(e) =>
                                 controllerField.onChange(e.value)
                               }
@@ -282,6 +287,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         showClear={true}
                         showFilterClear={true}
                         filter={true}
+                        disabled={field?.disabledField}
                       />
                     )}
                   />
@@ -302,6 +308,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         className="w-full"
                         showClear={true}
                         filter={true}
+                        disabled={field?.disabledField}
                       />
                     )}
                   />
@@ -322,6 +329,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         invalid={errors[field.name] ? true : false}
                         placeholder={field.placeholder}
                         className={`form_input_textarea w-full`}
+                        disabled={field?.disabledField}
                       />
                     )}
                   />
@@ -340,6 +348,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         placeholder={field.mask}
                         invalid={errors[field.name] ? true : false}
                         className={`form_input_text`}
+                        disabled={field?.disabledField}
                       />
                     )}
                   />

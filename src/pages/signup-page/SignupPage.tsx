@@ -6,7 +6,7 @@ import { FormField } from "../../utils/FormFieldEnum";
 import style from "./SignupPage.module.scss";
 import * as Yup from "yup";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
-import { ApiEndpoints } from "../../utils/ApiEndpoints";
+import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
 import { useNavigate } from "react-router";
 import { RouteConstant } from "../../utils/RouteConstant";
 import AxiosService from "../../services/axios-service/AxiosService";
@@ -23,7 +23,7 @@ const SignupPage = () => {
       type: "text",
       placeholder: "Type Name...",
       validation: Yup.string().min(2).max(50).required(),
-      fieldclass: "w-4/12",
+      fieldclass: "w-6/12",
     },
     {
       label: "Email Id",
@@ -31,8 +31,21 @@ const SignupPage = () => {
       type: "text",
       placeholder: "Type Email Id...",
       validation: Yup.string().email().max(75).required(),
-      fieldclass: "w-4/12",
+      fieldclass: "w-6/12",
       info: "You can Login into the Portal with Email-Id .",
+    },
+    {
+      label: "Mobile Number",
+      name: "mobileno",
+      type: "text",
+      placeholder: "99-99-99-99-99",
+      validation: Yup.string()
+        .required()
+        .min(10, "Min. Length is 10 !")
+        .max(10, "Max. Length is 10 !")
+        .required(),
+      fieldclass: "w-6/12",
+      info: "You can Login into the Portal with this Mobile-Number.",
     },
     {
       label: "Choose Password",
@@ -43,7 +56,7 @@ const SignupPage = () => {
       validation: Yup.string()
         .min(6, "Min length is 6!")
         .required("Password is Required !"),
-      fieldclass: "w-4/12",
+      fieldclass: "w-6/12",
     },
     {
       label: "Confirm Password",
@@ -54,36 +67,7 @@ const SignupPage = () => {
       validation: Yup.string()
         .oneOf([Yup.ref("password")], "Password must match!")
         .required("Confirm Password is Required !"),
-      fieldclass: "w-4/12",
-    },
-    {
-      label: "Enter your Age",
-      name: "age",
-      type: "number",
-      placeholder: "Type age...",
-      fieldclass: "w-4/12",
-      validation: Yup.number().min(2).max(150).required("Age is Required!"),
-    },
-    {
-      label: "Address",
-      name: "address",
-      type: "textarea",
-      placeholder: "Type Address...",
-      validation: Yup.string().max(250).required("Address is required !"),
-      fieldclass: "w-4/12",
-      rowcount: 2,
-    },
-    {
-      label: "Choose Gender",
-      name: "gender",
-      type: "radio",
-      options: [
-        { label: "Male", value: "Male" },
-        { label: "Female", value: "Female" },
-        { label: "Prefer not to say", value: "Other" },
-      ],
-      validation: Yup.string().required("Gender is required"),
-      fieldclass: "w-4/12",
+      fieldclass: "w-6/12",
     },
   ];
 
@@ -98,22 +82,29 @@ const SignupPage = () => {
         let formValues = {};
         formValues = signupFormRef.current.getFormValues();
         console.log("Form Values:", formValues);
-
-        const res = await axios.postRequest(ApiEndpoints.SignupApi, formValues);
-
-        console.log("API Response:", res);
-
-        if (res && res.state === 1) {
-          setLoading(false);
-          toaster.addToast(res?.message, "success", "Signup");
-          return navigate(RouteConstant.LoginPage);
-        } else {
-          toaster.addToast(
-            "Unexpected response from the server",
-            "error",
-            "Error"
-          );
-        }
+        axios
+          .postRequest(ApiEndpoints.Signup, formValues, UserAuthConfig)
+          .then((res: any) => {
+            setLoading(false);
+            if (res) {
+              if (res && res.state === 1) {
+                toaster.addToast(res?.message, "success", "Signup");
+                return navigate(RouteConstant.LoginPage);
+              }
+            } else {
+              setLoading(false);
+              toaster.addToast(
+                "Unexpected response from the server",
+                "error",
+                "Error"
+              );
+            }
+          })
+          .catch((err: any) => {
+            setLoading(false);
+            console.log(err);
+            return toaster.addToast(err?.message,'error')
+          });
       } else {
         return toaster.addToast(
           "Please fill all required field !",
@@ -127,16 +118,17 @@ const SignupPage = () => {
   const handleResetForm = () => {
     if (signupFormRef) {
       signupFormRef.current?.resetForm();
+      setLoading(false);
     }
   };
 
-  const onRoutetoLogin = () =>{
-    navigate(RouteConstant.LoginPage)
-  }
+  const onRoutetoLogin = () => {
+    navigate(RouteConstant.LoginPage);
+  };
 
-  const handleKeyDownonLogin = (event:any) => {
-    console.log('Hello')
-    if (event.key === 'Enter') {
+  const handleKeyDownonLogin = (event: any) => {
+    console.log("Hello");
+    if (event.key === "Enter") {
       event.preventDefault();
       handleFormSubmit();
     }
@@ -161,7 +153,14 @@ const SignupPage = () => {
               Register here for{" "}
               <span className={style.header_name}>Dental Care</span>{" "}
             </h6>
-            <Button label="" icon="pi pi-arrow-left" className="p-2" onClick={onRoutetoLogin} severity="secondary" tooltip="Back To Login" />
+            <Button
+              label=""
+              icon="pi pi-arrow-left"
+              className="p-2"
+              onClick={onRoutetoLogin}
+              severity="secondary"
+              tooltip="Back To Login"
+            />
           </div>
           <div
             className={
@@ -176,14 +175,14 @@ const SignupPage = () => {
           <div className="flex justify-center mt-2 mb-4 md:mb-5">
             <button className="styled_btn2 mr-3" onClick={handleResetForm}>
               <i className="pi pi-refresh"></i>
-              <span>Reset Password</span>
+              <span>Reset Form</span>
             </button>
 
             <button
               className="styled_btn1"
               disabled={loading}
               onClick={handleFormSubmit}
-              onKeyDown={(event)=>handleKeyDownonLogin(event)}
+              onKeyDown={(event) => handleKeyDownonLogin(event)}
             >
               {loading ? (
                 <>

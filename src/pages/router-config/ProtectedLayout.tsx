@@ -73,7 +73,7 @@ const ProtectedLayout = React.memo(
     useEffect(() => {
       if (ProtectedRoutes?.length) {
         const currentModule = ProtectedRoutes.find((route) =>
-          matchPath({ path: route.path, exact: true }, location.pathname)
+          matchPath({ path: route.path }, location.pathname)
         );
         setCurrentRoute(currentModule);
       }
@@ -104,11 +104,11 @@ const ProtectedLayout = React.memo(
             <div
               className={
                 style.logo_section +
-                " flex items-center p-4 transition border-b-1 border-gray-400 bg-lime-100 hover:bg-amber-600 text-slate-700 hover:text-white"
+                " flex justify-center items-center p-1 transition border-b-1 border-gray-400 bg-lime-100 hover:bg-amber-200 text-slate-700 hover:text-white"
               }
             >
-              <img src={ImageUrls.logo} className="h-12" alt="" />
-              <h6 className="m-0 pl-2 text-lg transition">Dental Care</h6>
+              <img src={ImageUrls.logo} className="h-full" alt="" />
+              {/* <h6 className="m-0 pl-2 text-lg transition">Dental Care</h6> */}
             </div>
             <div className={style.nav_scroll_section + " bg-gray-50 p-2"}>
               {ProtectedRoutes.map((route: RouteInterface) => (
