@@ -17,6 +17,7 @@
         height: 6rem;
         img{
             mix-blend-mode: multiply;
+            height: 100%;
         }
     }
 
@@ -83,14 +84,57 @@
     }
 }
 
+.collapse-class{
+    transition: width 0.5s ease;
+    animation-name: collapse-class;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+}
+@keyframes collapse-class {
+    0%{
+        left: 0px;
+    }
+    100%{
+        left: -230px;
+    }
+}
+.open-class{
+    transition: width 0.5s ease;
+    animation-name: open-class;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+}
+@keyframes open-class {
+    0%{
+        left: -230px;
+    }
+    100%{
+        left: 0px;
+    }
+}
+
 
 @media (max-width:426px) {
     .sidenav-section {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: 10;
+        .logo_section {
+            img{
+                mix-blend-mode: multiply;
+                height: 80%;
+            }
+        }
     }
+
+
 
     .outlet_section {
         width: 100%;

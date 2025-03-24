@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column, ColumnProps } from "primereact/column";
 import style from "./CustomTable.module.scss";
@@ -8,7 +8,7 @@ import { ThemeButtonProps } from "../../utils/TypescriptEnum";
 
 interface CustomColumnProps extends ColumnProps {
   minWidth?: string;
-  colkeyid?: any;
+  colkeyid?: string;
   isActionColumn?: boolean;
 }
 
@@ -21,46 +21,47 @@ interface TableProps {
 }
 
 interface ActionButtonInterface extends ThemeButtonProps {
-  buttonId?: any;
+  buttonId?: string;
 }
 
 const CustomTable = ({
-  tabledata,
-  scrollHeight,
+  tabledata = [],
+  scrollHeight = "calc(100vh - 210px)",
   tablecolumns,
-  actionButtonArray,
+  actionButtonArray = [],
   loading,
 }: TableProps) => {
-  useEffect(() => {
-    tablecolumns.map((column) => {
-      column.minWidth = column.minWidth ?? "180px";
-      column.body = column?.body ?? null;
-      column.colkeyid = uuidv4();
-      if(column.isActionColumn){
-        column.sortable = false;
-      }else{
-        column.sortable = true;
-      }
-    });
-
-    tabledata?.map((data) => {
-      data.id = uuidv4();
-    });
-
-    actionButtonArray?.map((action) => {
-      action.buttonId = uuidv4();
-      action.type = action.type ?? "success";
-    });
-
-    console.log("CustomTable", tablecolumns);
-  }, [tablecolumns, tabledata, actionButtonArray]);
-
+  const [globalFilters, setGlobalFilters] = useState("");
   const [value, setValue] = useState<boolean>(false);
-  const [globalFilters, setGlobalFilters] = useState<string>("");
 
-  const onExportExcel = () => {
-    console.log("onExportExcel");
-  };
+  const processedColumns = useMemo(
+    () =>
+      tablecolumns.map((column) => ({
+        ...column,
+        minWidth: column.minWidth ?? "180px",
+        body: column?.body ?? null,
+        colkeyid: column.colkeyid ?? uuidv4(),
+        sortable: column.isActionColumn ? false : true,
+      })),
+    [tablecolumns]
+  );
+
+  const processedData = useMemo(
+    () => tabledata.map((data) => ({ ...data, id: data.id ?? uuidv4() })),
+    [tabledata]
+  );
+
+  const processedActions = useMemo(
+    () =>
+      actionButtonArray.map((action) => ({
+        ...action,
+        buttonId: action.buttonId ?? uuidv4(),
+        type: action.type ?? "success",
+      })),
+    [actionButtonArray]
+  );
+
+  const onExportExcel = () => console.log("onExportExcel");
 
   return (
     <>
@@ -97,7 +98,7 @@ const CustomTable = ({
           )}
         </div>
         <div className={style["action_section"] + " flex gap-x-2"}>
-          {actionButtonArray?.map((action) => {
+          {processedActions?.map((action) => {
             return (
               <>
                 <CustomButton
@@ -119,13 +120,13 @@ const CustomTable = ({
         </div>
       </div>
       <DataTable
-        value={tabledata}
+        value={processedData}
         className="global-table-style rounded-tl-none rounded-tr-none"
-        size={"large"}
+        size="large"
         showGridlines
-        stripedRows={true}
+        stripedRows
         scrollable
-        scrollHeight={scrollHeight ? scrollHeight : "calc(100vh - 210px)"}
+        scrollHeight={scrollHeight}
         reorderableColumns
         globalFilter={globalFilters}
         paginator
@@ -137,11 +138,11 @@ const CustomTable = ({
         removableSort
         loading={loading}
       >
-        {tablecolumns.map((col) => (
+        {processedColumns.map((col) => (
           <Column
             {...col}
             key={col.colkeyid}
-            style={{ minWidth: col.minWidth }}
+            headerStyle={{ minWidth: col.minWidth }}
           />
         ))}
       </DataTable>

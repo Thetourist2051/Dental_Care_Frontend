@@ -8,6 +8,7 @@ export interface RouteInterface {
   modulename?: string;
   id?: any;
   moduleicon?: string;
+  accessRole : string[],
 }
 
 

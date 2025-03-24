@@ -15,5 +15,6 @@ export interface UserInterface  {
         createdAt?: Date; 
         updatedAt?: Date
         state ?:any,
+        role ?: 'admin' | 'user',
         [key:string]:any,
 }

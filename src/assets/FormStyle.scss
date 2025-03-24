@@ -8,6 +8,10 @@
     min-height: 5.35rem;
     width: 100%;
 
+    .p-inputgroup-addon{
+      height: 2.75rem;
+    }
+
     .custom_form_label {
       font-size: 1rem;
       font-weight: 600;
@@ -30,23 +34,23 @@
       width: calc(100% - 1rem);
       width: -webkit-fill-available;
       padding: 0.25rem 0.5rem;
-      border: 1px solid var(--tir-color);
-      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      // border-radius: 0.5rem;
       font-size: var(--font-size);
       transition: all 0.5s;
       outline: none;
       font-weight: 500;
-      letter-spacing : var(--letter-spacing);
+      letter-spacing: var(--letter-spacing);
       color: var(--pri-text-color);
 
       &:focus {
-        border: 1px solid var(--sec-color);
+        border: 1px solid var(--border-hover);
         box-shadow: 0 0 0 0.2rem #c7d2fe;
         transition: all 0.5s;
       }
 
       &:hover {
-        border: 1px solid var(--sec-color);
+        border: 1px solid var(--border-hover);
         transition: all 0.5s;
       }
     }
@@ -71,7 +75,7 @@
         transition: all 0.5s;
         outline: none;
         font-weight: 500;
-        letter-spacing : var(--letter-spacing);
+        letter-spacing: var(--letter-spacing);
         color: var(--pri-text-color);
       }
 
@@ -97,7 +101,7 @@
     .p-multiselect {
       width: calc(100% - 1rem);
       width: -webkit-fill-available;
-      border: 1px solid var(--tir-color);
+      border: 1px solid var(--border-color);
       border-radius: 0.5rem;
       transition: all 0.5s;
       outline: none;
@@ -107,7 +111,7 @@
       .p-multiselect-label {
         font-weight: 500;
         padding: 0.75rem 0.75rem;
-        letter-spacing : var(--letter-spacing);
+        letter-spacing: var(--letter-spacing);
         color: var(--pri-text-color);
         font-size: var(--font-size);
       }
@@ -118,13 +122,13 @@
       }
 
       &:hover {
-        border: 1px solid var(--sec-color);
+        border: 1px solid var(--border-hover);
         transition: all 0.5s;
       }
 
       &:focus {
         box-shadow: 0 0 0 0.2rem #c7d2fe;
-        border: 1px solid var(--sec-color);
+        border: 1px solid var(--border-hover);
         transition: all 0.5s;
       }
     }
@@ -134,7 +138,7 @@
         padding: 0;
 
         .p-multiselect-item {
-          letter-spacing : var(--letter-spacing);
+          letter-spacing: var(--letter-spacing);
           color: var(--pri-text-color);
           font-size: var(--font-size);
           font-weight: 500;
@@ -148,7 +152,7 @@
           font-size: var(--font-size);
           background: #ffffff;
           padding: 0.65rem 0.65rem;
-          letter-spacing : var(--letter-spacing);
+          letter-spacing: var(--letter-spacing);
           color: var(--pri-text-color);
         }
       }
@@ -208,7 +212,7 @@
     padding: 0;
 
     .p-dropdown-item {
-      letter-spacing : var(--letter-spacing);
+      letter-spacing: var(--letter-spacing);
       color: var(--pri-text-color);
       font-size: var(--font-size);
       font-weight: 500;
@@ -222,21 +226,58 @@
       font-size: var(--font-size);
       background: #ffffff;
       padding: 0.65rem 0.65rem;
-      letter-spacing : var(--letter-spacing);
+      letter-spacing: var(--letter-spacing);
       color: var(--pri-text-color);
     }
   }
 }
 
-@media (max-width: 426px){
-  .custom_form{
-    .iterator_class{
-      width: 100%!important;
-      margin-bottom: 1rem!important;
-      .custom_form_item{
+@media (max-width: 426px) {
+  .custom_form {
+    .iterator_class {
+      width: 100% !important;
+      margin-bottom: 1rem !important;
+
+      .custom_form_item {
         min-height: auto;
       }
     }
-  } 
+  }
 
+}
+
+.form_input_number.disabled-field {
+  opacity: 0.6;
+}
+
+.no_border_adjust {
+  .form_input_text,
+  .form_input_textarea,
+  .form_input_calender,
+  .form_input_number,
+  .form_input_password {
+    border-radius: 0.5rem 0.5rem;
+  }
+}
+
+.border_adjust_right {
+  .form_input_text,
+  .form_input_textarea,
+  .form_input_calender,
+  .form_input_number,
+  .form_input_password {
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+  }
+}
+
+
+
+.border_adjust_left {
+  .form_input_text,
+  .form_input_textarea,
+  .form_input_calender,
+  .form_input_number,
+  .form_input_password {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
 }

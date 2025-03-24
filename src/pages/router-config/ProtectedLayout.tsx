@@ -37,6 +37,9 @@ const ProtectedLayout = React.memo(
     >(undefined);
     const ProfileMenuRef = useRef<Menu>(null);
     const axios = new AxiosService();
+    const [sidenavCollapsed, setSidenavCollapsed] = useState<boolean>(false);
+    const [filteredRoutes, setFilteredRoutes] = useState<RouteInterface[]>([]);
+
 
     const Logout = async () => {
       const res = await axios.postRequest(
@@ -70,14 +73,25 @@ const ProtectedLayout = React.memo(
       },
     ];
 
+
     useEffect(() => {
-      if (ProtectedRoutes?.length) {
-        const currentModule = ProtectedRoutes.find((route) =>
+      if (userInfo && ProtectedRoutes?.length) {
+        const role = userInfo?.role;
+        const filtered = ProtectedRoutes.filter(route => 
+          route.accessRole.includes(role)
+        );
+        setFilteredRoutes(filtered);
+      }
+    }, [userInfo, ProtectedRoutes]);
+    
+    useEffect(() => {
+      if (filteredRoutes?.length) {
+        const currentModule = filteredRoutes.find(route =>
           matchPath({ path: route.path }, location.pathname)
         );
         setCurrentRoute(currentModule);
       }
-    }, [location.pathname, ProtectedRoutes]);
+    }, [location.pathname, filteredRoutes]);
 
     useEffect(() => {
       if (!userInfo) {
@@ -98,20 +112,25 @@ const ProtectedLayout = React.memo(
           <div
             className={
               style["sidenav-section"] +
+              " " +
+              (sidenavCollapsed ? style["collapse-class"] : style["open-class"]) +
               " border-gray-400 border border-collapse"
             }
           >
             <div
               className={
                 style.logo_section +
-                " flex justify-center items-center p-1 transition border-b-1 border-gray-400 bg-lime-100 hover:bg-amber-200 text-slate-700 hover:text-white"
+                " flex justify-evenly md:justify-center lg:justify-center xl:justify-center items-center p-1 transition border-b-1 border-gray-400 bg-lime-100 hover:bg-amber-200 text-slate-700 hover:text-white"
               }
             >
-              <img src={ImageUrls.logo} className="h-full" alt="" />
-              {/* <h6 className="m-0 pl-2 text-lg transition">Dental Care</h6> */}
+              <i
+                className="pi pi-arrow-left text-xl inline-block md:!hidden"
+                onClick={() => setSidenavCollapsed(true)}
+              ></i>
+              <img src={ImageUrls.logo} alt="" />
             </div>
-            <div className={style.nav_scroll_section + " bg-gray-50 p-2"}>
-              {ProtectedRoutes.map((route: RouteInterface) => (
+            <div className={style.nav_scroll_section + " bg-gray-100 p-2"}>
+              {filteredRoutes.map((route: RouteInterface) => (
                 <NavLink
                   key={route.id}
                   to={route.path}
@@ -152,10 +171,11 @@ const ProtectedLayout = React.memo(
             <nav
               className={
                 style.outlet_header +
-                " py-4 px-3 md:p-4 xl:px-5 flex justify-between items-center bg-teal-500 hover:bg-teal-600 transition"
+                " py-4 px-3 md:p-4 xl:px-5 flex justify-between items-center bg-amber-600 hover:bg-amber-700 transition"
               }
             >
-              <div className={style.outlet_heading}>
+              <div className={'flex items-center justify-start'}>
+                <i className="pi pi-arrow-right text-xl text-white mr-3 inline-block md:!hidden" onClick={()=>setSidenavCollapsed(false)} ></i>
                 <h5 className="text-base font-semibold m-0 text-gray-100 hover:text-white">
                   {currentRoute?.modulename}
                 </h5>
@@ -176,7 +196,7 @@ const ProtectedLayout = React.memo(
                 </div>
               </div>
             </nav>
-            <div className={style.scrollable_section + " transition-all p-4"}>
+            <div className={style.scrollable_section + " transition-all p-4 bg-gray-50"}>
               <Outlet />
             </div>
           </div>

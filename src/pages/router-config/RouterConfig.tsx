@@ -10,7 +10,10 @@ import { RootState } from "../../utils/redux-store/appstore";
 import AxiosService from "../../services/axios-service/AxiosService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
 import { adduser } from "../../utils/redux-store/userslice";
-import { getAuthToken, removeAuthToken } from "../../services/cookie-service/CookieService";
+import {
+  getAuthToken,
+  removeAuthToken,
+} from "../../services/cookie-service/CookieService";
 
 const RouterConfig = () => {
   console.log("in router");
@@ -33,17 +36,19 @@ const RouterConfig = () => {
   const BookingHistory = React.lazy(
     () => import("../booking-history/BookingHistory")
   );
-  const ProfilePage = React.lazy(()=> import("../profile-page/ProfilePage"))
+  const ProfilePage = React.lazy(() => import("../profile-page/ProfilePage"));
 
   const axios = new AxiosService();
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.user);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-
   const fetchProfile = async () => {
     try {
-      const res = await axios.getRequest(ApiEndpoints.FetchProfile, UserAuthConfig);
+      const res = await axios.getRequest(
+        ApiEndpoints.FetchProfile,
+        UserAuthConfig
+      );
       if (res.state === 1) {
         dispatch(adduser(res.data));
         setIsAuthenticated(true);
@@ -78,27 +83,36 @@ const RouterConfig = () => {
       path: RouteConstant.DefaultPage,
       element: <DefaultPageCompoment />,
       id: uuidv4(),
+      accessRole: ["admin", "user"],
     },
     {
       path: RouteConstant.LoginPage,
       element: <LoginPageComponent />,
       id: uuidv4(),
+      accessRole: ["admin", "user"],
     },
     {
       path: RouteConstant.SignupPage,
       element: <SignupPageComponent />,
       id: uuidv4(),
+      accessRole: ["admin", "user"],
     },
-    { path: "*", element: <PageNotFoundComponent />, id: uuidv4() },
+    {
+      path: "*",
+      element: <PageNotFoundComponent />,
+      id: uuidv4(),
+      accessRole: ["admin", "user"],
+    },
   ];
 
-  const ProtectedRoutes: RouteInterface[] = [
+  const ProtectedRoutes: any[] = [
     {
       path: RouteConstant.AllUsers,
       element: <AllUsers />,
       modulename: "All Users",
       id: uuidv4(),
       moduleicon: "pi pi-users",
+      accessRole: ["admin"],
     },
     {
       path: RouteConstant.BookAppoinments,
@@ -106,6 +120,7 @@ const RouterConfig = () => {
       modulename: "Book Appoinments",
       id: uuidv4(),
       moduleicon: "pi pi-plus-circle",
+      accessRole: ["admin", "user"],
     },
     {
       path: RouteConstant.BookingHistory,
@@ -113,6 +128,7 @@ const RouterConfig = () => {
       modulename: "Booking History",
       id: uuidv4(),
       moduleicon: "pi pi-history",
+      accessRole: ["admin", "user"],
     },
     {
       path: RouteConstant.Profilepage,
@@ -120,6 +136,7 @@ const RouterConfig = () => {
       modulename: "Profile",
       id: uuidv4(),
       moduleicon: "pi pi-user",
+      accessRole: ["admin", "user"],
     },
   ];
 
@@ -132,7 +149,7 @@ const RouterConfig = () => {
           ))}
           <Route
             element={
-               user ? (
+              user ? (
                 <ProtectedLayout
                   userInfo={user}
                   ProtectedRoutes={ProtectedRoutes}

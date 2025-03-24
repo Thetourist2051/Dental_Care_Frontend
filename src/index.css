@@ -17,6 +17,9 @@
   --sec-color: #66785F;
   --tir-color: #91AC8F;
 
+  --border-color: #c2c2c2;
+  --border-hover: #cebdbd;
+
   --base-color: #fafafa;
   --text-black: #232323;
 
@@ -214,7 +217,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-color: var(--pri-color);
   background-color: var(--pri-bg);
   padding: 0.75rem 0.75rem;
-  min-width: 120px;
+  min-width: 150px;
 }
 
 .global-table-style .p-datatable-tbody>tr>td {
@@ -225,6 +228,9 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 500;
   letter-spacing: 0.5px;
   color: var(--text-color);
+}
+.global-table-style .p-datatable-tbody>tr:last-child>td {
+  border-width: 1px 0px 1px 1px !important;
 }
 
 .global-table-style .p-datatable-thead tr th .p-column-header-content .p-column-title {

@@ -42,7 +42,7 @@ const AllUsers = () => {
         <div className="flex justify-start items-center">
           <i
             className="pi pi-ellipsis-v text-base font-bold cursor-pointer"
-            onClick={(e) => {
+            onClick={(e:any) => {
               setRowData(rowData);
               opRef?.current && opRef?.current?.toggle(e);
             }}
@@ -64,9 +64,14 @@ const AllUsers = () => {
       field: "fullname",
     },
     { field: "email", header: "Email" },
-    { field: "address", header: "Address" },
+    { field: "address", header: "Address", minWitdh: '220px' },
     { field: "age", header: "Age", textAlign: "center" },
     { field: "gender", header: "Gender" },
+    { field: "bloodgroup", header: "Blood Group" },
+    { field: "medicalHistory", header: "Medical History", minWidth: '250px' },
+    { field: "currentMedications", header: "Current Medications" },
+    { field: "bloodPressure", header: "Blood Pressure" },
+    { field: "alcoholConsumption", header: "Alcohol Consumption" },
   ];
 
   const onAddEvent = () => {
@@ -88,9 +93,9 @@ const AllUsers = () => {
   ];
 
   const onEditUser = () => {
-    if(rowData){
-      console.log(rowData?._id)
-      navigate(RouteConstant.Profilepage,{state:JSON.stringify(rowData)})
+    if (rowData) {
+      console.log(rowData?._id);
+      navigate(RouteConstant.Profilepage, { state: JSON.stringify(rowData) });
     }
   };
 
@@ -117,7 +122,7 @@ const AllUsers = () => {
           <Divider className="my-1" />
           <li>
             <div className="overlayItem">
-              <i className="pi pi-google"></i>
+              <i className="pi pi-envelope"></i>
               <h6>Send Remainder</h6>
             </div>
           </li>

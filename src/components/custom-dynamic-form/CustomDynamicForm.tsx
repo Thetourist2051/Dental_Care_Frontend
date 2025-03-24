@@ -21,6 +21,7 @@ interface FormData {
 
 interface DynamicFormProps {
   formFieldsArr: FormField[];
+  viewForm?: boolean;
 }
 
 export interface CustomDynamicFormHandle {
@@ -35,8 +36,7 @@ export interface CustomDynamicFormHandle {
 }
 
 const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
-  ({ formFieldsArr }, ref) => {
-    // Set default values for all fields
+  ({ formFieldsArr, viewForm = false }, ref) => {
     const defaultValues = formFieldsArr.reduce((acc, field) => {
       if (field.type === "number") {
         acc[field.name] = null;
@@ -52,7 +52,10 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
 
     formFieldsArr = formFieldsArr.map((field: FormField) => ({
       fieldclass: field.fieldclass ?? "w-full",
-      disabledField : field?.disabledField ?? false,
+      addonIcon: field.addonIcon ?? null,
+      addonIconPosition: field.addonIconPosition ?? "left",
+      addonPieIcon: field.addonPieIcon ?? true,
+      disabledField: viewForm ? true : field?.disabledField ?? false,
       ...field,
       options: field.options || [],
     }));
@@ -117,9 +120,21 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
           {formFieldsArr.map((field: FormField) => (
             <div
               key={field.name}
-              className={"iterator_class px-1 md:px-2 xl:px-3 " + " " + field.fieldclass}
+              className={
+                "iterator_class px-1 md:px-2 xl:px-3 " + " " + field.fieldclass
+              }
+            >
+              <div
+                className={`custom_form_item ${
+                  field.addonIcon
+                    ? field.addonIconPosition === "left"
+                      ? "border_adjust_left"
+                      : field.addonIconPosition === "right"
+                      ? "border_adjust_right"
+                      : ""
+                    : "no_border_adjust"
+                }`}
               >
-              <div className={"custom_form_item"}>
                 <label
                   className="custom_form_label text-black mb-2"
                   htmlFor={field.name}
@@ -148,15 +163,45 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                     name={field.name}
                     control={control}
                     render={({ field: controllerField }) => (
-                      <InputText
-                        id={field.name}
-                        invalid={errors[field.name] ? true : false}
-                        className={`form_input_text`}
-                        {...controllerField}
-                        placeholder={field.placeholder}
-                        value={controllerField.value as string}
-                        disabled={field?.disabledField}
-                      />
+                      <>
+                        <div className="p-inputgroup flex-1">
+                          {field.addonIcon &&
+                            field.addonIconPosition === "left" && (
+                              <span className="p-inputgroup-addon">
+                                {field.addonPieIcon ? (
+                                  <i className={`pi pi-${field.addonIcon}`}></i>
+                                ) : (
+                                  <span className="text-sm font-semibold">
+                                    {field.addonIcon}
+                                  </span>
+                                )}
+                              </span>
+                            )}
+
+                          <InputText
+                            id={field.name}
+                            invalid={!!errors[field.name]}
+                            className="form_input_text"
+                            {...controllerField}
+                            placeholder={field.placeholder}
+                            value={controllerField.value as string}
+                            disabled={field?.disabledField}
+                          />
+
+                          {field.addonIcon &&
+                            field.addonIconPosition === "right" && (
+                              <span className="p-inputgroup-addon">
+                                {field.addonPieIcon ? (
+                                  <i className={`pi pi-${field.addonIcon}`}></i>
+                                ) : (
+                                  <span className="text-sm font-semibold">
+                                    {field.addonIcon}
+                                  </span>
+                                )}
+                              </span>
+                            )}
+                        </div>
+                      </>
                     )}
                   />
                 ) : field.type === "password" ? (
@@ -164,20 +209,60 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                     name={field.name}
                     control={control}
                     render={({ field: controllerField }) => (
-                      <Password
-                        id={field.name}
-                        className={`password_class`}
-                        invalid={errors[field.name] ? true : false}
-                        inputClassName="form_input_password"
-                        {...controllerField}
-                        placeholder={field?.placeholder}
-                        value={controllerField.value as string}
-                        feedback={field?.passwordmeter}
-                        toggleMask={true}
-                        header={field.passwordmeter ? FeedbackHeader : null}
-                        footer={field.passwordmeter ? FeedbackFooter : null} 
-                        disabled={field?.disabledField}
-                      />
+                      <>
+                        <>
+                          <div className="p-inputgroup flex-1">
+                            {field.addonIcon &&
+                              field.addonIconPosition === "left" && (
+                                <span className="p-inputgroup-addon">
+                                  {field.addonPieIcon ? (
+                                    <i
+                                      className={`pi pi-${field.addonIcon}`}
+                                    ></i>
+                                  ) : (
+                                    <span className="text-sm font-semibold">
+                                      {field.addonIcon}
+                                    </span>
+                                  )}
+                                </span>
+                              )}
+
+                            <Password
+                              id={field.name}
+                              className={`password_class`}
+                              invalid={errors[field.name] ? true : false}
+                              inputClassName="form_input_password"
+                              {...controllerField}
+                              placeholder={field?.placeholder}
+                              value={controllerField.value as string}
+                              feedback={field?.passwordmeter}
+                              toggleMask={true}
+                              header={
+                                field.passwordmeter ? FeedbackHeader : null
+                              }
+                              footer={
+                                field.passwordmeter ? FeedbackFooter : null
+                              }
+                              disabled={field?.disabledField}
+                            />
+
+                            {field.addonIcon &&
+                              field.addonIconPosition === "right" && (
+                                <span className="p-inputgroup-addon">
+                                  {field.addonPieIcon ? (
+                                    <i
+                                      className={`pi pi-${field.addonIcon}`}
+                                    ></i>
+                                  ) : (
+                                    <span className="text-sm font-semibold">
+                                      {field.addonIcon}
+                                    </span>
+                                  )}
+                                </span>
+                              )}
+                          </div>
+                        </>
+                      </>
                     )}
                   />
                 ) : field.type === "number" ? (
@@ -191,6 +276,10 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
                         disabled={field?.disabledField}
                         className={`form_input_number ${
                           errors[field.name] ? "p-invalid" : ""
+                        } ${
+                          field?.disabledField
+                            ? "disabled-field"
+                            : "active-field"
                         }`}
                         {...controllerField}
                         placeholder={field.placeholder}

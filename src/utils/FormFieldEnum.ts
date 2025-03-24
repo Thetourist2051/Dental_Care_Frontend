@@ -26,4 +26,7 @@ export interface FormField {
   colcount?:number,
   info?:string,
   disabledField?:boolean,
+  addonIcon?:string | undefined | null,
+  addonIconPosition?: "left" | "right",
+  addonPieIcon?: boolean,
 }

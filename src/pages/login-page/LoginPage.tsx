@@ -31,7 +31,7 @@ function LoginPage({}: Props) {
   const navigate = useNavigate();
   const toaster = useToaster();
   const axios = new AxiosService();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const formFieldsArr: FormField[] = [
     {
@@ -40,6 +40,7 @@ function LoginPage({}: Props) {
       label: "User Email",
       placeholder: "Type Email...",
       validation: Yup.string().required("User Email is required!"),
+      addonIcon:'user'
     },
     {
       name: "password",
@@ -47,7 +48,8 @@ function LoginPage({}: Props) {
       label: "Password",
       passwordmeter: false,
       placeholder: "Type Password...",
-      validation: Yup.string().min(8, "Min length is 8!").required(),
+      validation: Yup.string().min(6, "Min length is 6!").required(),
+      addonIcon:'lock'
     },
   ];
 
@@ -71,20 +73,28 @@ function LoginPage({}: Props) {
           removeCookieCredentials();
         }
         setLoading(true);
-        const res = await axios.postRequest(ApiEndpoints.Login,formValues,UserAuthConfig);
-        if(res){
-          setLoading(false);
-          if (res.state === 1) {
-            setAuthToken(res?.token)
-            console.log(getAuthToken(), "afridi");
-            GlobalService.userInfo.next(res?.userInfo);
-            dispatch(adduser(res?.userInfo))
-            toaster.addToast(res.message, "success");
-            return navigate(RouteConstant.BookAppoinments);
-          }else if(res.state === -1){
-            toaster.addToast(res.error, "error");
-          }
-        }
+        axios
+          .postRequest(ApiEndpoints.Login, formValues, UserAuthConfig)
+          .then((res: any) => {
+            if (res) {
+              setLoading(false);
+              if (res.state === 1) {
+                setAuthToken(res?.token);
+                console.log(getAuthToken(), "afridi");
+                GlobalService.userInfo.next(res?.userInfo);
+                dispatch(adduser(res?.userInfo));
+                toaster.addToast(res.message, "success");
+                return navigate(RouteConstant.BookAppoinments);
+              } else if (res.state === -1) {
+                toaster.addToast(res.message, "error");
+              }
+            }
+          })
+          .catch((err: any) => {
+            setLoading(false);
+            console.log(err)
+            toaster.addToast(err?.response?.data?.message, "error");
+          });
       } else {
         console.log("Form has errors.");
         setLoading(false);
