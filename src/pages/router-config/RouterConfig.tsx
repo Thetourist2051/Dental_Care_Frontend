@@ -33,9 +33,9 @@ const RouterConfig = () => {
   const BookAppoinments = React.lazy(
     () => import("../book-appoinments/BookAppoinments")
   );
-  const BookingHistory = React.lazy(
-    () => import("../booking-history/BookingHistory")
-  );
+  // const BookingHistory = React.lazy(
+  //   () => import("../booking-history/BookingHistory")
+  // );
   const ProfilePage = React.lazy(() => import("../profile-page/ProfilePage"));
 
   const axios = new AxiosService();
@@ -115,21 +115,21 @@ const RouterConfig = () => {
       accessRole: ["admin"],
     },
     {
-      path: RouteConstant.BookAppoinments,
+      path: RouteConstant.Appoinments,
       element: <BookAppoinments />,
-      modulename: "Book Appoinments",
+      modulename: "Appoinments",
       id: uuidv4(),
       moduleicon: "pi pi-plus-circle",
       accessRole: ["admin", "user"],
     },
-    {
-      path: RouteConstant.BookingHistory,
-      element: <BookingHistory />,
-      modulename: "Booking History",
-      id: uuidv4(),
-      moduleicon: "pi pi-history",
-      accessRole: ["admin", "user"],
-    },
+    // {
+    //   path: RouteConstant.BookingHistory,
+    //   element: <BookingHistory />,
+    //   modulename: "Booking History",
+    //   id: uuidv4(),
+    //   moduleicon: "pi pi-history",
+    //   accessRole: ["admin", "user"],
+    // },
     {
       path: RouteConstant.Profilepage,
       element: <ProfilePage />,

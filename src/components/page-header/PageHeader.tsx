@@ -25,7 +25,7 @@ const PageHeader = () => {
       label: "Book Appointments",
       icon: "pi pi-plus",
       command: () => {
-        navigate(RouteConstant.BookAppoinments, { replace: true });
+        navigate(RouteConstant.Appoinments, { replace: true });
       },
     },
   ];

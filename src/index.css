@@ -12,6 +12,15 @@
 }
 
 
+img {
+  max-width: 100%;
+}
+
+/* h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+} */
+
+
 :root {
   --pri-color: #eb6b0e;
   --sec-color: #66785F;
@@ -147,19 +156,21 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 600;
 }
 
-.p-overlaypanel .p-overlaypanel-content{
+.p-overlaypanel .p-overlaypanel-content {
   padding: 0.65rem 0.75rem;
 }
 
-.overlay_panel_class ul{
+.overlay_panel_class ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.overlay_panel_class ul li{
+
+.overlay_panel_class ul li {
   display: block;
 }
-.overlay_panel_class ul li .overlayItem{
+
+.overlay_panel_class ul li .overlayItem {
   height: 2rem;
   display: flex;
   justify-content: flex-start;
@@ -169,15 +180,17 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 0 0.5rem;
   border-radius: 0.5rem;
 }
-.overlay_panel_class ul li .overlayItem:hover{
+
+.overlay_panel_class ul li .overlayItem:hover {
   background: var(--color-amber-100);
   transition: background 0.5s ease-in-out;
 }
 
-.overlay_panel_class ul li .overlayItem .pi{
+.overlay_panel_class ul li .overlayItem .pi {
   font-size: 1rem;
 }
-.overlay_panel_class ul li .overlayItem h6{
+
+.overlay_panel_class ul li .overlayItem h6 {
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0 0 0 0.875rem;
@@ -229,6 +242,7 @@ input[type=number]::-webkit-outer-spin-button {
   letter-spacing: 0.5px;
   color: var(--text-color);
 }
+
 .global-table-style .p-datatable-tbody>tr:last-child>td {
   border-width: 1px 0px 1px 1px !important;
 }

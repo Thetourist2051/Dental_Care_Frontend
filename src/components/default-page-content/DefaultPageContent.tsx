@@ -3,12 +3,75 @@ import { ImageUrls } from "../../utils/ImageUrls";
 import CustomButton from "../custom-button/CustomButton";
 import style from "./DefaultPageContent.module.scss";
 import { RouteConstant } from "../../utils/RouteConstant";
+import { useEffect, useState } from "react";
 
 const DefaultPageContent = () => {
   const navigate = useNavigate();
+  const [services, setServices] = useState<any[]>([]);
+  const [dentalCare, setDentalCare] = useState<any[]>([]);
+  const [patientCenteredCare, setPatientCenteredCare] = useState<any[]>([]);
   const onAppointmentClick = () => {
-    navigate(RouteConstant.BookAppoinments);
+    navigate(RouteConstant.Appoinments);
   };
+
+  useEffect(() => {
+    setServices([
+      {
+        label: "General Dentistry",
+        info: "Comprehensive care to maintain your oral health and prevent future issues.",
+        card_img: ImageUrls.GeneralDentistry,
+        btnLabel: "Learn More",
+      },
+      {
+        label: "Cosmetic Dentistry",
+        info: "Enhance your smile with advanced treatments tailored to your aesthetic goals.",
+        card_img: ImageUrls.CosmeticDentistry,
+        btnLabel: "Discover More",
+      },
+      {
+        label: "Orthodontics",
+        info: "Achieve a straighter smile with personalized orthodontic solutions for all ages.",
+        card_img: ImageUrls.Orthodontics,
+        btnLabel: "Find Out More",
+      },
+    ]);
+    setDentalCare([
+      {
+        label: "Flexible Scheduling",
+        btn_label: "Book Your Visit",
+        card_img: ImageUrls.FlexibleScheduling,
+      },
+      {
+        label: "Personalized Care",
+        btn_label: "Learn More",
+        card_img: ImageUrls.PersonalizedCare,
+      },
+      {
+        label: "Preventive Focus",
+        btn_label: "Discover Benifits",
+        card_img: ImageUrls.PreventiveFocus,
+      },
+    ]);
+    setPatientCenteredCare([
+      {
+        label: "Tailored Consultation",
+        card_img: ImageUrls.TailoredConsultation,
+      },
+      {
+        label: "Personalized Treatment",
+        card_img: ImageUrls.PersonalizedTreatment,
+      },
+      {
+        label: "Comfort In Every Step",
+        card_img: ImageUrls.Comfort,
+      },
+      {
+        label: "Satisfaction Guaranteed      ",
+        card_img: ImageUrls.CustomerSatisfaction,
+      },
+    ]);
+    console.log(dentalCare);
+  }, []);
 
   return (
     <>
@@ -43,8 +106,8 @@ const DefaultPageContent = () => {
       </div>
       <div className={style.second_content + " w-full"}>
         <div className="container h-full w-full m-auto">
-          <div className="flex w-full h-full p-0">
-            <div className="md:w-7/12 sm:w-full flex flex-col justify-center items-center pl-4 pr-[10%] py-4">
+          <div className="flex w-full flex-wrap h-full p-0">
+            <div className="max-[426px]:w-full max-[426px]:py-6 md:w-6/12 pl-4 max-[426px]:pr-4 md:pr-[5%] xl:pr-[10%] flex flex-col justify-center items-center">
               <h4 className="text-3xl text-center mt-0 mb-2 font-bold w-4/6">
                 Serving Smile Since{" "}
                 <span className="underline underline-offset-8">2022</span>
@@ -60,19 +123,14 @@ const DefaultPageContent = () => {
                 Trust her to care for your smile with the utmost professionalism
                 and compassion.
               </p>
-              <div
-                role="button"
-                className="theme_button flex justify-center items-center cursor-pointer my-4"
-              >
-                <label className="pr-2 font-medium cursor-pointer">
-                  My Services
-                </label>
-                <span className="material-symbols-rounded font-normal">
-                  arrow_circle_right
-                </span>
-              </div>
+              <button className="styled_btn3 my-4">
+                Get in touch
+                <span className="pi pi-arrow-right"></span>
+              </button>
             </div>
-            <div className={style.content_2 + " md:w-5/12 sm:w-full p-0"}>
+            <div
+              className={style.content_2 + " max-[426px]:hidden md:w-6/12 p-0"}
+            >
               <div className={style.content_bg}>
                 <img
                   src={ImageUrls.dentalserve}
@@ -83,10 +141,20 @@ const DefaultPageContent = () => {
           </div>
         </div>
       </div>
-      <div className={style.third_content + " w-full"}>
+
+      <div
+        className={style.third_content + " " + style.common_spacing + " w-full"}
+      >
         <div className="container h-full w-full m-auto">
           <div className="flex flex-wrap h-full">
-            <div className="md:w-6/12 sm:w-full px-[5%] flex flex-col justify-center items-start p-4">
+            <div className="max-[426px]:w-full md:w-6/12 md:px-[3%] flex flex-col justify-center items-start h-full">
+              <img
+                src={ImageUrls.AboutMaria}
+                className={style.third_img}
+                alt=""
+              />
+            </div>
+            <div className="max-[426px]:w-full max-[426px]:py-6 max-[426px]:px-6 md:w-6/12 px-[3%] flex flex-col justify-center items-start h-full">
               <h4 className="text-3xl mt-0 mb-4">
                 Meet <br />
                 Dr. Maria <span className="undeline_span"> Chishty</span>
@@ -101,12 +169,105 @@ const DefaultPageContent = () => {
                 understand and are comfortable with their treatment.
               </p>
             </div>
-            <div className="w-6/12"></div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={
+          style.fourth_content + " " + style.common_spacing + " w-full"
+        }
+      >
+        <div className="container h-full w-full m-auto">
+          <div className="text-center w-full h-full">
+            <h4 className="text-3xl text-center mt-0 mb-5 font-bold">
+              Comprehensive Dental Services
+            </h4>
+            <h6 className="text-xl mt-0 mb-6 font-semibold px-[15%]">
+              Explore our diverse range of dental treatments designed to meet
+              your unique needs and preferences.
+            </h6>
+            <div
+              className={
+                style.service_card_content +
+                " w-full gap-8 grid max-[426px]:grid-cols-1 grid-cols-3"
+              }
+            >
+              {services.map((service) => (
+                <>
+                  <div
+                    className={
+                      style.service_card +
+                      " card bg-lime-50 rounded-md hover:bg-lime-100 hover:rounded-xl transition overflow-hidden"
+                    }
+                    key={service.label}
+                  >
+                    <div className={style.card_img}>
+                      <img
+                        className="transition"
+                        src={service.card_img}
+                        alt={service.label + "info"}
+                      />
+                    </div>
+                    <div className={style["card_content"] + " text-left"}>
+                      <h5 className="text-lg font-semibold mt-0 mb-3">
+                        {service.label}
+                      </h5>
+                      <p className="text-sm font-medium mt-0 mb-4">
+                        {service?.info}
+                      </p>
+                      <button className="styled_btn1 my-2">
+                        <span>{service?.btnLabel}</span>
+                        <i className="pi pi-arrow-right"></i>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={style.fifth_content + " " + style.common_spacing + " w-full"}
+      >
+        <div className="container h-full w-full m-auto">
+          <div className="text-center w-full h-full">
+            <h4 className="text-3xl mt-0 mb-5 font-bold text-gray-100">
+              Compassionate and <br/> Personalized Patient-Centered Care
+            </h4>
+
+            <h6 className="text-xl font-semibold mt-0 max-[426px]:mb-4 mb-6 text-gray-200">
+              Your Comfort, Well-being, and Satisfaction Are Our Top Priorities
+            </h6>
+          </div>
+          <div
+            className={
+              style.service_card_content +
+              " w-full py-8 lg:py-12 grid max-[426px]:grid-cols-1 grid-cols-2 max-[426px]:gap-4 md:gap-8 lg:gap-12"
+            }
+          >
+            {patientCenteredCare.map((care) => (
+              <>
+                <div
+                  className={
+                    style.content_card +
+                    " card transition relative overflow-hidden rounded-xl hover:rounded-2xl hover:translate-y-[-0.5rem] "
+                  }
+                  style={{
+                    backgroundImage: `url(${care.card_img})`,
+                  }}
+                >
+                  <h6 className="m-0">{care?.label}</h6>
+                </div>
+              </>
+            ))}
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default DefaultPageContent;

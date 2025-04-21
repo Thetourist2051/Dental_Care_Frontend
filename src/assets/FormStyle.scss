@@ -8,7 +8,7 @@
     min-height: 5.35rem;
     width: 100%;
 
-    .p-inputgroup-addon{
+    .p-inputgroup-addon {
       height: 2.75rem;
     }
 
@@ -166,7 +166,8 @@
       width: 100%;
 
       .p-input-icon {
-        top: 45%;
+        top: 50%;
+        height: 1rem;
       }
     }
   }
@@ -251,6 +252,7 @@
 }
 
 .no_border_adjust {
+
   .form_input_text,
   .form_input_textarea,
   .form_input_calender,
@@ -261,6 +263,7 @@
 }
 
 .border_adjust_right {
+
   .form_input_text,
   .form_input_textarea,
   .form_input_calender,
@@ -273,6 +276,7 @@
 
 
 .border_adjust_left {
+
   .form_input_text,
   .form_input_textarea,
   .form_input_calender,

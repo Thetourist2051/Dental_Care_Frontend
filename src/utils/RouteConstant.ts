@@ -6,6 +6,6 @@ export const RouteConstant = {
     Profilepage: '/dental-care/profile',
     EditProfilepage: '/dental-care/profile/:id',
     AllUsers: '/dental-care/all-users',
-    BookAppoinments: '/dental-care/book-appoinments',
+    Appoinments: '/dental-care/book-appoinments',
     BookingHistory: '/dental-care/booking-history',
   };

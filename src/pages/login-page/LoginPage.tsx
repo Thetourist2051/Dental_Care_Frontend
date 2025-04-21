@@ -13,7 +13,6 @@ import AxiosService from "../../services/axios-service/AxiosService";
 import {
   GetCookieCredentails,
   SaveCredentialstoCookie,
-  getAuthToken,
   removeCookieCredentials,
   setAuthToken,
 } from "../../services/cookie-service/CookieService";
@@ -80,11 +79,10 @@ function LoginPage({}: Props) {
               setLoading(false);
               if (res.state === 1) {
                 setAuthToken(res?.token);
-                console.log(getAuthToken(), "afridi");
                 GlobalService.userInfo.next(res?.userInfo);
                 dispatch(adduser(res?.userInfo));
                 toaster.addToast(res.message, "success");
-                return navigate(RouteConstant.BookAppoinments);
+                return navigate(RouteConstant.Appoinments);
               } else if (res.state === -1) {
                 toaster.addToast(res.message, "error");
               }
