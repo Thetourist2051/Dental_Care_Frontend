@@ -233,6 +233,19 @@
   }
 }
 
+@media (max-width: 769px) {
+  .custom_form {
+    .iterator_class {
+      width: 50% !important;
+      margin-bottom: 1rem !important;
+
+      .custom_form_item {
+        min-height: auto;
+      }
+    }
+  }
+}
+
 @media (max-width: 426px) {
   .custom_form {
     .iterator_class {
@@ -246,6 +259,7 @@
   }
 
 }
+
 
 .form_input_number.disabled-field {
   opacity: 0.6;

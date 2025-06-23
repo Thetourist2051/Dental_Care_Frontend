@@ -288,3 +288,12 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 500;
   color: var(--sec-color);
 }
+
+
+
+.label-span {
+  font-weight: 600;
+  margin: 0 0 0 0.5rem;
+  line-height: 1.25;
+  color: var(--primary-color);
+}

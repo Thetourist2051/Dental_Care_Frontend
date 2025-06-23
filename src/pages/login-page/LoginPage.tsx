@@ -18,8 +18,7 @@ import {
 } from "../../services/cookie-service/CookieService";
 import { GlobalService } from "../../services/global-service/GlobalService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
-import { useDispatch } from "react-redux";
-import { adduser } from "../../utils/redux-store/userslice";
+import { useLoginPageStore } from "../../store/login-page-store/useLoginPageStore";
 
 type Props = {};
 
@@ -30,7 +29,8 @@ function LoginPage({}: Props) {
   const navigate = useNavigate();
   const toaster = useToaster();
   const axios = new AxiosService();
-  const dispatch = useDispatch();
+
+  const { setUserInfo } = useLoginPageStore();
 
   const formFieldsArr: FormField[] = [
     {
@@ -39,7 +39,7 @@ function LoginPage({}: Props) {
       label: "User Email",
       placeholder: "Type Email...",
       validation: Yup.string().required("User Email is required!"),
-      addonIcon:'user'
+      addonIcon: "user",
     },
     {
       name: "password",
@@ -48,7 +48,7 @@ function LoginPage({}: Props) {
       passwordmeter: false,
       placeholder: "Type Password...",
       validation: Yup.string().min(6, "Min length is 6!").required(),
-      addonIcon:'lock'
+      addonIcon: "lock",
     },
   ];
 
@@ -80,7 +80,7 @@ function LoginPage({}: Props) {
               if (res.state === 1) {
                 setAuthToken(res?.token);
                 GlobalService.userInfo.next(res?.userInfo);
-                dispatch(adduser(res?.userInfo));
+                setUserInfo(res?.userInfo);
                 toaster.addToast(res.message, "success");
                 return navigate(RouteConstant.Appoinments);
               } else if (res.state === -1) {
@@ -90,7 +90,7 @@ function LoginPage({}: Props) {
           })
           .catch((err: any) => {
             setLoading(false);
-            console.log(err)
+            console.log(err);
             toaster.addToast(err?.response?.data?.message, "error");
           });
       } else {

@@ -121,7 +121,7 @@ const CustomDynamicForm = forwardRef<CustomDynamicFormHandle, DynamicFormProps>(
             <div
               key={field.name}
               className={
-                "iterator_class px-1 md:px-2 xl:px-3 " + " " + field.fieldclass
+                field.fieldclass + " " + "iterator_class px-1 md:px-2 xl:px-3"
               }
             >
               <div

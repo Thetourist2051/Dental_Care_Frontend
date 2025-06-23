@@ -1,7 +1,5 @@
 import { memo, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { RootState } from "../../utils/redux-store/appstore";
 import { FormField } from "../../utils/FormFieldEnum";
 import * as Yup from "yup";
 import CustomDynamicForm, {
@@ -11,11 +9,10 @@ import CustomButton from "../../components/custom-button/CustomButton";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
 import AxiosService from "../../services/axios-service/AxiosService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
-import { adduser } from "../../utils/redux-store/userslice";
+import { useLoginPageStore } from "../../store/login-page-store/useLoginPageStore";
 
 const ProfilePage: React.FC = memo(() => {
   const location = useLocation();
-  const user = useSelector((store: RootState) => store.user);
   const [viewProfileForm, setViewProfileForm] = useState<boolean>(true);
   const ProfileFormRef = useRef<CustomDynamicFormHandle>(null);
   const toaster = useToaster();
@@ -27,7 +24,7 @@ const ProfilePage: React.FC = memo(() => {
       placeholder: "Type Name...",
       validation: Yup.string().min(2).max(50).required(),
       fieldclass: "w-4/12",
-      addonIcon:'user'
+      addonIcon: "user",
     },
     {
       label: "Email Id",
@@ -36,7 +33,7 @@ const ProfilePage: React.FC = memo(() => {
       placeholder: "Type Email Id...",
       validation: Yup.string().email().max(75).required(),
       fieldclass: "w-4/12",
-      addonIcon:'envelope',
+      addonIcon: "envelope",
     },
     {
       label: "Mobile Number",
@@ -128,9 +125,9 @@ const ProfilePage: React.FC = memo(() => {
       placeholder: "Blood Pressure",
       validation: Yup.string().max(150).notRequired(),
       fieldclass: "w-4/12",
-      addonIcon:'mmHg',
+      addonIcon: "mmHg",
       addonPieIcon: false,
-      info:"(In mmHG unit)"
+      info: "(In mmHG unit)",
     },
     {
       label: "Alcohol Consumption ?",
@@ -147,17 +144,18 @@ const ProfilePage: React.FC = memo(() => {
 
   const [isFormUpdating, setIsFormUpdating] = useState<boolean>(false);
   const axios = new AxiosService();
-  const dispatch = useDispatch();
+
+  const { setUserInfo, userInfo } = useLoginPageStore();
 
   const patchProfileForm = () => {
-    if (ProfileFormRef && ProfileFormRef?.current && user) {
+    if (ProfileFormRef && ProfileFormRef?.current && userInfo) {
       const FieldsArr = ProfileFormFields.map((field) => field.name);
-      const keys = Object.keys(user);
+      const keys = Object.keys(userInfo);
 
       keys.forEach((key: string) => {
         if (FieldsArr.includes(key)) {
           if (ProfileFormRef && ProfileFormRef.current) {
-            ProfileFormRef.current.setFormValue(key, user[key]);
+            ProfileFormRef.current.setFormValue(key, userInfo[key]);
           }
         }
       });
@@ -177,24 +175,30 @@ const ProfilePage: React.FC = memo(() => {
         const isValidForm = await ProfileFormRef.current.triggerValidation();
         if (isValidForm) {
           setIsFormUpdating(true);
-          const formvalues= ProfileFormRef.current.getFormValues();
-          axios.putRequest(ApiEndpoints.UpdateProfile,formvalues,UserAuthConfig).then((res:any)=>{
-            if(res ){
-              setIsFormUpdating(false);
-              if(res.state === 1){
-                toaster.addToast(res?.message, 'success');
-                dispatch(adduser(res?.updateduser));
-              }else{
-                setIsFormUpdating(false)
+          const formvalues = ProfileFormRef.current.getFormValues();
+          axios
+            .putRequest(ApiEndpoints.UpdateProfile, formvalues, UserAuthConfig)
+            .then((res: any) => {
+              if (res) {
+                setIsFormUpdating(false);
+                if (res.state === 1) {
+                  toaster.addToast(res?.message, "success");
+                  setUserInfo(res?.updateduser);
+                } else {
+                  setIsFormUpdating(false);
+                }
               }
-            }
-          }).catch((err:any)=>{
-            toaster.addToast(err?.message || 'An Unknown Error Occured !', 'error');
-            setIsFormUpdating(false)
-          })
+            })
+            .catch((err: any) => {
+              toaster.addToast(
+                err?.message || "An Unknown Error Occured !",
+                "error"
+              );
+              setIsFormUpdating(false);
+            });
         } else {
           setIsFormUpdating(true);
-          toaster.addToast("Please Fill all the Required Fields", "error");
+          toaster.addToast("Please Fill all the Required Fields !", "error");
         }
       }
     }
@@ -203,21 +207,39 @@ const ProfilePage: React.FC = memo(() => {
   return (
     <>
       <h6 className="text-xl mt-0 mb-4">
-        {viewProfileForm ? "Update Your Profile" : "Profile Details"}
+        Your Profile Info
+        {viewProfileForm && (
+          <i
+            className="pi pi-pencil pl-3 label-span cursor-pointer"
+            data-pr-tooltip="Edit Profile"
+            onClick={onUpdateProfile}
+          ></i>
+        )}
       </h6>
-      <CustomDynamicForm
-        ref={ProfileFormRef}
-        formFieldsArr={ProfileFormFields}
-        viewForm={viewProfileForm}
-      />
-      <div className="flex justify-end border-t-1 border-gray-400 p-2">
-        <CustomButton
-          label={viewProfileForm ? "Edit Profile" : "Update Profile"}
-          apihitting={isFormUpdating}
-          icon={viewProfileForm ? "pencil" : "send"}
-          onSubmitEvent={onUpdateProfile}
+      <div
+        className={"overflow-auto"}
+        style={{
+          height: viewProfileForm
+            ? "calc(100vh - 140px)"
+            : "calc(100vh - 195px - 1rem)",
+        }}
+      >
+        <CustomDynamicForm
+          ref={ProfileFormRef}
+          formFieldsArr={ProfileFormFields}
+          viewForm={viewProfileForm}
         />
       </div>
+      {!viewProfileForm && (
+        <div className="flex justify-end border-t-1 border-gray-400 px-2 pt-2">
+          <CustomButton
+            label={"Update Profile"}
+            apihitting={isFormUpdating}
+            icon={"send"}
+            onSubmitEvent={onUpdateProfile}
+          />
+        </div>
+      )}
     </>
   );
 });

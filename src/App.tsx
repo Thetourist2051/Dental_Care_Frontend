@@ -8,18 +8,14 @@ import "./assets/Animation.scss";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 import RouterConfig from "./pages/router-config/RouterConfig";
 import Toaster from "./components/toaster/Toaster";
-import { Provider } from "react-redux";
-import { store } from "./utils/redux-store/appstore";
 
 function App() {
   return (
     <>
       <div className="init_div">
         <ErrorBoundary>
-          <Provider store={store}>
-            <Toaster></Toaster>
-            <RouterConfig></RouterConfig>
-          </Provider>
+          <Toaster></Toaster>
+          <RouterConfig></RouterConfig>
         </ErrorBoundary>
       </div>
     </>

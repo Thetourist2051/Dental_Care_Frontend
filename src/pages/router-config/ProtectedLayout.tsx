@@ -12,12 +12,11 @@ import { RouteInterface } from "../../utils/TypescriptEnum";
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
 import { ImageUrls } from "../../utils/ImageUrls";
-import { useDispatch } from "react-redux";
-import { adduser } from "../../utils/redux-store/userslice";
 import AxiosService from "../../services/axios-service/AxiosService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
 import { useToaster } from "../../context/toaster-context/ToasterContext";
 import { removeAuthToken } from "../../services/cookie-service/CookieService";
+import { useLoginPageStore } from "../../store/login-page-store/useLoginPageStore";
 
 interface ProtectedLayoutProps {
   ProtectedRoutes: RouteInterface[];
@@ -28,7 +27,6 @@ const ProtectedLayout = React.memo(
   ({ ProtectedRoutes, userInfo }: ProtectedLayoutProps) => {
     console.log(userInfo);
     const toaster = useToaster();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -41,6 +39,8 @@ const ProtectedLayout = React.memo(
     const [filteredRoutes, setFilteredRoutes] = useState<RouteInterface[]>([]);
 
 
+    const {setUserInfo} = useLoginPageStore();
+
     const Logout = async () => {
       const res = await axios.postRequest(
         ApiEndpoints.Logout,
@@ -48,7 +48,7 @@ const ProtectedLayout = React.memo(
         UserAuthConfig
       );
       if (res && res.state == 1) {
-        dispatch(adduser(null));
+        setUserInfo(null)
         navigate(RouteConstant.LoginPage);
         toaster.addToast(res?.message, "success");
         removeAuthToken();

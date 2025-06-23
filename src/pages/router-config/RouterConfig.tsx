@@ -5,15 +5,13 @@ import ProtectedLayout from "./ProtectedLayout";
 import { v4 as uuidv4 } from "uuid";
 import { RouteInterface } from "../../utils/TypescriptEnum";
 import CustomLoader from "../../components/custom-loader/CustomLoader";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../utils/redux-store/appstore";
 import AxiosService from "../../services/axios-service/AxiosService";
 import { ApiEndpoints, UserAuthConfig } from "../../utils/ApiEndpoints";
-import { adduser } from "../../utils/redux-store/userslice";
 import {
   getAuthToken,
   removeAuthToken,
 } from "../../services/cookie-service/CookieService";
+import { useLoginPageStore } from "../../store/login-page-store/useLoginPageStore";
 
 const RouterConfig = () => {
   console.log("in router");
@@ -39,9 +37,10 @@ const RouterConfig = () => {
   const ProfilePage = React.lazy(() => import("../profile-page/ProfilePage"));
 
   const axios = new AxiosService();
-  const dispatch = useDispatch();
-  const user = useSelector((store: RootState) => store.user);
+  
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  const {setUserInfo, userInfo} = useLoginPageStore()
 
   const fetchProfile = async () => {
     try {
@@ -50,16 +49,16 @@ const RouterConfig = () => {
         UserAuthConfig
       );
       if (res.state === 1) {
-        dispatch(adduser(res.data));
+        setUserInfo(res?.data)
         setIsAuthenticated(true);
       } else {
-        dispatch(adduser(null));
+        setUserInfo(null);
         setIsAuthenticated(false);
         removeAuthToken();
       }
     } catch (error) {
       console.error("Failed to fetch profile:", error);
-      dispatch(adduser(null));
+      setUserInfo(null);
       setIsAuthenticated(false);
       removeAuthToken();
     }
@@ -149,9 +148,9 @@ const RouterConfig = () => {
           ))}
           <Route
             element={
-              user ? (
+              userInfo ? (
                 <ProtectedLayout
-                  userInfo={user}
+                  userInfo={userInfo}
                   ProtectedRoutes={ProtectedRoutes}
                 />
               ) : (
