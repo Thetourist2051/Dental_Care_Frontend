@@ -101,7 +101,7 @@ export const useDefaultPageStore = create<DefaultPageStoreState>((set) => ({
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer Api_key`,
             "HTTP-Referer": "",
             "X-Title": "",
             "Content-Type": "application/json",
